@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="static/images/icons/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <style>
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+	</style>
+</head>
+<body>
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="POST">
+				<span class="contact100-form-title">
+					Конфигуратор виртуальных ресурсов
+				</span>
+
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<input class="input100" type="number" min="2" max="144" name="core" required placeholder="Количество ядер (2-144 шт.)">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<input class="input100" type="number" min="2" max="1024" name="ram" required placeholder="Объём памяти (2-1024 GB)">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<input class="input100" type="number" min="2" max="512000" name="sata" required placeholder="Объём дискового пространства SATA (2-512000 GB)">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<input class="input100" type="number" min="2" max="512000" name="sas" required placeholder="Объём дискового пространства SAS (2-512000 GB)">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<input class="input100" type="number" min="2" max="10240" name="ssd" required placeholder="Объём дискового пространства SSD (2-10240 GB)">
+					<span class="focus-input100"></span>
+				</div>
+
+				<span class="input100">Цена в месяц: {% block body %}{% endblock %}₽</span>
+
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+							<button class="contact100-form-btn" type="submit">
+								<span>
+								Заказать
+								</span>
+							</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
