@@ -6,36 +6,10 @@ CoreDataNet
 
 
 {% block request %}
-<script>
-let request = new XMLHttpRequest();
-request.open('POST','http://127.0.0.1:5000/',true);
-request.addEventListener('readystatechange', function() {
-  if ((request.readyState==4) && (request.status==200)) {
-    console.log(request);
-    console.log(request.responseText);
-    //let info = document.getElementsByName('core', 'ram', 'sata', 'sas', 'ssd').value;
-    let info = document.core
-    info.innerHTML = request.responseText;
-  }
-});
-request.send();
-</script>
+	<script src = "static/ajax.js"></script>
 {% endblock %}
 
 
 {% block body %}
 {{result}}
-<!--<script>-->
-<!--let request = new XMLHttpRequest();-->
-<!--request.open('GET','http://127.0.0.1:5000/',true);-->
-<!--request.addEventListener('readystatechange', function() {-->
-<!--  if ((request.readyState==4) && (request.status==200)) {-->
-<!--    let info = document.getElementsByName('result').value;-->
-<!--    info.innerHTML = request.responseText;-->
-<!--    print(info)-->
-<!--  }-->
-<!--});-->
-<!--request.send();-->
-
-<!--</script>-->
 {% endblock %}
