@@ -36,7 +36,6 @@ input[type=number]::-webkit-outer-spin-button {
   	src="https://code.jquery.com/jquery-3.5.1.js"
   	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
   	crossorigin="anonymous"></script>
-	<script src = "static/ajax.js"></script>
 	{% block request %}{% endblock %}
 	<div class="container-contact100">
 		<div class="wrap-contact100">
@@ -46,36 +45,37 @@ input[type=number]::-webkit-outer-spin-button {
 				</span>
 
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input class="input100" type="number" min="2" max="144" name="core" required placeholder="Количество ядер (2-144 шт.)">
+					<input id="core-id" class="input100" type="number" min="2" max="144" required placeholder="Количество ядер (2-144 шт.)">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input class="input100" type="number" min="2" max="1024" name="ram" required placeholder="Объём памяти (2-1024 GB)">
+					<input id="ram-id" class="input100" type="number" min="2" max="1024" required placeholder="Объём памяти (2-1024 GB)">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input class="input100" type="number" min="2" max="512000" name="sata" required placeholder="Объём дискового пространства SATA (2-512000 GB)">
+					<input id="sata-id" class="input100" type="number" min="2" max="512000" required placeholder="Объём дискового пространства SATA (2-512000 GB)">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input class="input100" type="number" min="2" max="512000" name="sas" required placeholder="Объём дискового пространства SAS (2-512000 GB)">
+					<input id="sas-id" class="input100" type="number" min="2" max="512000" required placeholder="Объём дискового пространства SAS (2-512000 GB)">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input class="input100" type="number" min="2" max="10240" name="ssd" required placeholder="Объём дискового пространства SSD (2-10240 GB)">
+					<input id="ssd-id" class="input100" type="number" min="2" max="10240" required placeholder="Объём дискового пространства SSD (2-10240 GB)">
 					<span class="focus-input100"></span>
 				</div>
 
-				<span class="input100" name="result">Цена в месяц: {% block body %}{% endblock %}₽</span>
+				<span class="input100">Цена в месяц: </span>
+				<span class="input100" id="result">0</span>
 
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-							<button class="contact100-form-btn" type="submit">
+							<button id="submit" class="contact100-form-btn" type="submit">
 								<span>
 								Заказать
 								</span>

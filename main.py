@@ -1,39 +1,37 @@
 from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 import xlrd
+import json
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///price.db'  # подключение базы к объекту
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)  # создание базы
-
-
-class Price(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    price = db.Column(db.Integer)
-
-    def __repr__(self):
-        return '<Price %r>' % self.id
 
 
 @app.route("/", methods=['POST', 'GET'])  # принимает введённые данные пользователя
 def index():
-    if request.method == "POST":
-        CORE = int(request.form['core'])  # принимает названия с формы
-        RAM = int(request.form['ram'])
-        SATA = int(request.form['sata'])
-        SAS = int(request.form['sas'])
-        SSD = int(request.form['ssd'])
-        result1 = multiRAM(RAM)
-        result2 = multiCore(CORE)
-        result3 = SXD(SATA)
-        result4 = SXD(SSD)
-        result5 = SXD(SAS)
-        res = result1 + result2 + result3 + result4 + result5
-        return render_template('index.html', result=res)
+    if request.method == "POST":  # принимает значения с формы
+        # encoder = json.dumps()
+        result = 0
+        for i in request.form:
+            if request.form[i] != '':
+                result += switch_dict(i, int(request.form[i]))
+            else:
+                continue
+        return json.dumps(result)
     else:
         return render_template("index.html")
+
+
+def switch_dict(x, value):  # switch в python(возвращает значение, посчитанное с excel)
+    if x == "core":
+        return multiCore(value)
+    elif x == "ram":
+        return multiRAM(value)
+    elif x == "sata":
+        return SXD(value)
+    elif x == "sas":
+        return SXD(value)
+    elif x == "ssd":
+        return SXD(value)
 
 
 def multiCore(numerous):  # результат цены для ядер
@@ -79,12 +77,6 @@ def find_name(ws, name):  # поиск нужного пункта в списк
                 if price.value == 2:
                     return ws.cell_value(j, value1)
     return -1
-
-
-'''
-book = xlrd.open_workbook('Прайс_CoreDataNet_03_08_20.xlsx')  # открытие книги
-xls = book.sheet_by_name('Лист1')  # чтение книги по названию
-'''
 
 
 if __name__ == "__main__":
