@@ -22,6 +22,7 @@ function sendRequest(){
     })
 }
 
+
 $(document).ready(function () { // когда документ готов к работе, то начинать проверку изменений
 
     $('#core-id').change(sendRequest);
@@ -33,4 +34,5 @@ $(document).ready(function () { // когда документ готов к р�
     $('#sas-id').change(sendRequest);
 
     $('#ssd-id').change(sendRequest);
+
 })
