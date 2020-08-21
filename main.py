@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, send_from_directory
 import json
 import xlrd
 import doc
@@ -6,7 +6,7 @@ import doc
 app = Flask(__name__)
 
 
-book = xlrd.open_workbook('Прайс_CoreDataNet_03_08_20.xlsx')  # открытие книги
+book = xlrd.open_workbook('static/Прайс_CoreDataNet_03_08_20.xlsx')  # открытие книги
 xls = book.sheet_by_name('Лист1')  # чтение книги по названию
 
 
@@ -14,18 +14,23 @@ xls = book.sheet_by_name('Лист1')  # чтение книги по назва
 def index():
     if request.method == "POST":  # принимает значения с формы
         for key in request.form:
-            if request.form[key] == 'True':
-                hdd = int(request.form['sata']) + int(request.form['sas']) + int(request.form['ssd'])
-                doc.docx(request.form['core'], request.form['ram'], hdd)
-                return render_template('docx.html')
-        else:
+            if request.form[key] == 'True':  # если какая-либо кнопка была нажата
+                if key == 'genKP':
+                    hdd = int(request.form['sata']) + int(request.form['sas']) + int(request.form['ssd'])
+                    doc.docx(request.form['core'], request.form['ram'], hdd)
+                    return send_from_directory(directory="dynamic",  # возвращает готовый pdf файл
+                                               filename="pdf1.pdf",
+                                               mimetype='application/pdf')
+                elif key == 'genContract':
+                    return render_template("index.html")
+        else:  # если на сайте вводятся значения
             result = 0
             for i in request.form:
                 if request.form[i] != '':
                     result += switch_dict(i, int(request.form[i]))
                 else:
                     continue
-            return json.dumps(result)
+            return json.dumps(result)  # возвращает результат для запроса на вывод
     else:
         return render_template("index.html")
 

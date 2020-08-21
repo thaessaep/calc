@@ -1,22 +1,19 @@
 from docxtpl import DocxTemplate
-import docx
+
+
+wdFormatText = 17  # код pdf-документа
 
 
 def docx(core, ram, hdd):
-    document = DocxTemplate("Основа_Дата_Нэт.docx")  # читает шаблон docx документа
+    document = DocxTemplate("MainDataNet.docx")  # читает шаблон docx документа
     info = {
-        'company': '1',
-        'director': '2',
+        'company': 'Имя компании?',
+        'director': 'Имя заказчика?',
+        'name': "Кто-то?",
         'core': core,
         'ram': ram,
         'hdd': hdd,
     }
     document.render(info)  # редактирует шаблон
-    document.save('Основа_Дата_Нэт_результат.docx')
-    # a=''
-    # fullText = []
-    # doc = docx.Document('Основа_Дата_Нэт_результат.docx')
-    # for res in doc:
-    #     fullText.append(res.text)
-    # a = '\n'.join(fullText)
-    # print(a)
+    document.save('MainDataNetResult.docx')
+    # convert(r"test.docx", r"D:/Calc/dynamic/MainDataNetResult.pdf")
