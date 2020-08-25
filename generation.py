@@ -1,18 +1,21 @@
-from flask import request, send_from_directory, render_template
+from flask import request, send_from_directory, redirect
 import doc
 import calc_of_value
 
 
 def genKP(xls):
+    doc.docxData(request.form['core'], request.form['ram'], hddRes(), total(xls))
+    return redirect("/pdf1", code=302)  # код 302 - пост-запрос
+
+
+def genContract(xls):
+    doc.docxServ(request.form['core'], request.form['ram'], hddRes(), total(xls))
+    return redirect("/pdf2", code=302)  # код 302 - пост-запрос
+
+
+def hddRes():
     hdd = int(request.form['sata']) + int(request.form['sas']) + int(request.form['ssd'])
-    doc.docx(request.form['core'], request.form['ram'], hdd, total(xls))
-    return send_from_directory(directory="dynamic",  # возвращает готовый pdf файл
-                               filename="MainDataNetResult.pdf",
-                               mimetype='application/pdf')
-
-
-def genContract():
-    return render_template("index.html")
+    return hdd
 
 
 def total(xls):
