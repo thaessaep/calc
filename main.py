@@ -14,33 +14,13 @@ def index():
         return render_template("index.html")
 
 
-@app.route("/pdf1", methods=["POST", "GET"])
-def pdfRes1():
-    if request.method == "POST":
-        return send_from_directory(directory="pdf",  # возвращает готовый pdf файл
-                                   filename="MainDataNetResult.pdf",
-                                   mimetype='application/pdf')
-    else:
-        return render_template("index.html")
-
-
-@app.route("/pdf2", methods=["POST", "GET"])
-def pdfRes2():
-    if request.method == "POST":
-        return send_from_directory(directory="pdf",  # возвращает готовый pdf файл
-                                   filename="virtual_serv_result.pdf",
-                                   mimetype='application/pdf')
-    else:
-        return render_template("index.html")
-
-
 def post():
     for key in request.form:
         if request.form[key] == 'True':  # если какая-либо кнопка была нажата
             if key == 'genKP':
-                return generation.genKP(xls)
+                return generation.genKP(request.form['core'], request.form['ram'])
             elif key == 'genContract':
-                return generation.genContract(xls)
+                return generation.genContract(request.form['core'], request.form['ram'])
     else:  # если на сайте вводятся значения
         return json.dumps(generation.total(xls))  # возвращает результат для запроса на вывод
 

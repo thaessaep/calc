@@ -1,16 +1,31 @@
-from flask import request, send_from_directory, redirect
-import doc
+from flask import request, send_from_directory, render_template, redirect
 import calc_of_value
+import pdfkit
 
 
-def genKP(xls):
-    doc.docxData(request.form['core'], request.form['ram'], hddRes(), total(xls))
-    return redirect("/pdf1", code=302)  # код 302 - пост-запрос
+def genKP(core, ram):
+    doc = open("templates/MainDataNetResult.html", "w", encoding="UTF-8")
+    doc.write(render_template("MainDataNet.html", core=core, ram=ram, hdd=hddRes())+"")
+    doc.close()
+    return genPdf("templates/MainDataNetResult.html", "pdf/MainDataNetResult.pdf", "MainDataNetResult.pdf")
 
 
-def genContract(xls):
-    doc.docxServ(request.form['core'], request.form['ram'], hddRes(), total(xls))
-    return redirect("/pdf2", code=302)  # код 302 - пост-запрос
+def genContract(core, ram):
+    doc = open("templates/virtual_serv_result.html", "w", encoding="UTF-8")
+    doc.write(render_template("virtual_serv.html", core=core, ram=ram, hdd=hddRes()) + "")
+    doc.close()
+    return genPdf("templates/virtual_serv_result.html", "pdf/virtual_serv_result.pdf", "virtual_serv_result.pdf")
+
+
+def genPdf(html, pdf, filename):
+    config = pdfkit.configuration(wkhtmltopdf="C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe")
+    options = {'enable-local-file-access': None}  # чтобы мог читать картинки
+    pdfkit.from_file(html, pdf,
+                     configuration=config,
+                     options=options)
+    return send_from_directory(directory="pdf",  # возвращает готовый pdf файл
+                               filename=filename,
+                               mimetype='application/pdf')
 
 
 def hddRes():
