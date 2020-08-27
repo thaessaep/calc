@@ -1,11 +1,11 @@
-from flask import request, send_from_directory, render_template, redirect
+from flask import request, send_from_directory, render_template
 import calc_of_value
 import pdfkit
 
 
-def genKP(core, ram):
-    doc = open("templates/MainDataNetResult.html", "w", encoding="UTF-8")
-    doc.write(render_template("MainDataNet.html", core=core, ram=ram, hdd=hddRes())+"")
+def genKP(core, ram, price):
+    doc = open("templates/MainDataNetResult.html", "w", encoding="UTF-8")  # open and write new html
+    doc.write(render_template("MainDataNet.html", core=core, ram=ram, hdd=hddRes(), price=price)+"")
     doc.close()
     return genPdf("templates/MainDataNetResult.html", "pdf/MainDataNetResult.pdf", "MainDataNetResult.pdf")
 
@@ -17,13 +17,13 @@ def genContract(core, ram):
     return genPdf("templates/virtual_serv_result.html", "pdf/virtual_serv_result.pdf", "virtual_serv_result.pdf")
 
 
-def genPdf(html, pdf, filename):
+def genPdf(html, pdf, filename):  # convert html in pdf
     config = pdfkit.configuration(wkhtmltopdf="C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe")
-    options = {'enable-local-file-access': None}  # чтобы мог читать картинки
+    options = {'enable-local-file-access': None}  # can convert image
     pdfkit.from_file(html, pdf,
                      configuration=config,
                      options=options)
-    return send_from_directory(directory="pdf",  # возвращает готовый pdf файл
+    return send_from_directory(directory="pdf",  # return ready pdf
                                filename=filename,
                                mimetype='application/pdf')
 
@@ -33,10 +33,10 @@ def hddRes():
     return hdd
 
 
-def total(xls):
+def total(xls):  # total payment amount
     result = 0
     for i in request.form:
-        if request.form[i] != '' and i != 'genKP' and i != 'genContract':  # проверка на кнопки(genKp...) и на value
+        if request.form[i] != '' and i != 'genKP' and i != 'genContract':  # check button(genKp...) and value
             result += calc_of_value.switch_dict(xls, i, int(request.form[i]))
         else:
             continue

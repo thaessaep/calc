@@ -1,97 +1,68 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<title>{% block title %}{% endblock %}</title>
+	<title>Test1</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="static/images/icons/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
-    <style>
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-input[type="number"]:hover,
-input[type="number"]:focus {
-  -moz-appearance: number-input;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-	</style>
 </head>
 <body>
-	<script
+<script
   	src="https://code.jquery.com/jquery-3.5.1.js"
   	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
   	crossorigin="anonymous"></script>
 	{% block request %}{% endblock %}
-	<div class="container-contact100">
-		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" method="post" name="my">
-				<span class="contact100-form-title">
-					Конфигуратор виртуальных ресурсов
-				</span>
-
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input id="core-id" class="input100" type="number" min="2" max="144" name="core" required placeholder="Количество ядер (2-144 шт.)">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input id="ram-id" class="input100" type="number" min="2" max="1024" name="ram" required placeholder="Объём памяти (2-1024 GB)">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input id="sata-id" class="input100" type="number" min="2" max="512000" name="sata" required placeholder="Объём дискового пространства SATA (2-512000 GB)">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input id="sas-id" class="input100" type="number" min="2" max="512000" name="sas" required placeholder="Объём дискового пространства SAS (2-512000 GB)">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input id="ssd-id" class="input100" type="number" min="2" max="10240" name="ssd" required placeholder="Объём дискового пространства SSD (2-10240 GB)">
-					<span class="focus-input100"></span>
-				</div>
-
-				<span class="input100">Цена в месяц: </span>
-				<span class="input100" id="result">0</span>
-
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-							<button name="genKP" class="contact100-form-btn" type="submit" value="True">
-								Генерировать кп
-							</button>
-					</div>
-				</div>
-
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-							<button name="genContract" class="contact100-form-btn" type="submit" value="True">
-								Генерировать договор на вр
-							</button>
-					</div>
-				</div>
-
-			</form>
+	<h2>Test1</h2>
+	<form method="post" name="my">
+		<div>
+			<p>Количество ядер (2-144 шт.):</p>
+			<input type="range" id="coreinput" value="72" min="2" max="144" step="2"
+			   	oninput="coreoutput.value = coreinput.value">
+			<input type="number" required name="core" id="coreoutput" oninput="coreinput.value = coreoutput.value">
 		</div>
-	</div>
+
+		<div>
+			<p>Объём памяти (2-1024 GB):</p>
+			<input type="range" id="raminput" value="512" min="2" max="1024" step="2"
+			   	oninput="ramoutput.value = raminput.value">
+			<input type="number" required name="ram" id="ramoutput" oninput="raminput.value = ramoutput.value">
+		</div>
+
+		<div>
+			<p>Объём дискового пространства SATA (2-512000 GB):</p>
+			<input type="range" id="satainput" value="256000" min="2" max="512000" step="2"
+			   	oninput="sataoutput.value = satainput.value">
+			<input type="number" required name="sata" id="sataoutput" oninput="satainput.value = sataoutput.value">
+		</div>
+
+		<div>
+			<p>Объём дискового пространства SAS (2-512000 GB):</p>
+			<input type="range" id="sasinput" value="256000" min="2" max="512000" step="2"
+			   	oninput="sasoutput.value = sasinput.value">
+			<input type="number" required name="sas" id="sasoutput" oninput="sasinput.value = sasoutput.value">
+		</div>
+
+		<div>
+			<p>Объём дискового пространства SSD (2-10240 GB):</p>
+			<input type="range" id="ssdinput" value="5120" min="2" max="10240" step="2"
+			  	 oninput="ssdoutput.value = ssdinput.value">
+			<input type="number" required name="ssd" id="ssdoutput" oninput="ssdinput.value = ssdoutput.value">
+		</div>
+
+		<div>
+			<p>Цена в месяц: <output id="result">0</output>₽</p>
+		</div>
+
+		<div>
+			<button name="genKP" type="submit" value="True">
+				Генерировать кп
+			</button>
+		</div>
+		<div>
+			<button name="genContract" class="contact100-form-btn" type="submit" value="True">
+				Генерировать договор на вр
+			</button>
+		</div>
+	</form>
+
 </body>
 </html>

@@ -6,11 +6,11 @@ function sendRequest(){
         url: "http://127.0.0.1:5000/",
         method: "POST",
         data : {
-            'core': $('#core-id').val(),
-            'ram': $('#ram-id').val(),
-            'sata': $('#sata-id').val(),
-            'sas': $('#sas-id').val(),
-            'ssd': $('#ssd-id').val(),
+            'core': $('#coreoutput').val(),
+            'ram': $('#ramoutput').val(),
+            'sata': $('#sataoutput').val(),
+            'sas': $('#sasoutput').val(),
+            'ssd': $('#ssdoutput').val(),
         },
         success: function (result) { // принимает значение с Python и парсит его
             result = $.parseJSON(result)
@@ -25,14 +25,24 @@ function sendRequest(){
 
 $(document).ready(function () { // когда документ готов к работе, то начинать проверку изменений
 
-    $('#core-id').change(sendRequest);
+    $('#coreoutput').change(sendRequest);
 
-    $('#ram-id').change(sendRequest);
+    $('#ramoutput').change(sendRequest);
 
-    $('#sata-id').change(sendRequest);
+    $('#sataoutput').change(sendRequest);
 
-    $('#sas-id').change(sendRequest);
+    $('#sasoutput').change(sendRequest);
 
-    $('#ssd-id').change(sendRequest);
+    $('#ssdoutput').change(sendRequest);
+
+    $('#coreinput').change(sendRequest);
+
+    $('#raminput').change(sendRequest);
+
+    $('#satainput').change(sendRequest);
+
+    $('#sasinput').change(sendRequest);
+
+    $('#ssdinput').change(sendRequest);
 
 })
