@@ -18,9 +18,11 @@ def post():
     for key in request.form:
         if request.form[key] == 'True':  # if was click on button если какая-либо кнопка была нажата
             if key == 'genKP':
-                return generation.genKP(request.form['core'], request.form['ram'], generation.total(xls))
+                return generation.genKP(request.form['core'], request.form['ram']
+                                        , generation.total(xls), request.form['clientName'])
             elif key == 'genContract':
-                return generation.genContract(request.form['core'], request.form['ram'])
+                return generation.genContract(request.form['core']
+                                              , request.form['ram'], request.form['clientContract'])
     else:  # if user write value
         return json.dumps(generation.total(xls))  # return result of values
 

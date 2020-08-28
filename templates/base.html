@@ -1,68 +1,149 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<title>Test1</title>
+	{% block title %} {% endblock %}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<link rel="icon" type="image/png" href="static/images/icons/favicon.ico">
 </head>
-<body>
-<script
-  	src="https://code.jquery.com/jquery-3.5.1.js"
-  	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  	crossorigin="anonymous"></script>
-	{% block request %}{% endblock %}
-	<h2>Test1</h2>
-	<form method="post" name="my">
-		<div>
-			<p>Количество ядер (2-144 шт.):</p>
-			<input type="range" id="coreinput" value="72" min="2" max="144" step="2"
-			   	oninput="coreoutput.value = coreinput.value">
-			<input type="number" required name="core" id="coreoutput" oninput="coreinput.value = coreoutput.value">
+	<body>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"
+				integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+				crossorigin="anonymous"></script>
+		{% block request %} {% endblock %}
+		<div class="menu">
+			<form method="post" name="virtual">
+				<h2>Конфигуратор виртуальных ресурсов</h2>
+				
+				<div>
+					<span>Клиент:</span>
+					<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
+					<input type="number" required min="0" name="clientContract" id="clientContractId" placeholder="№ договора">
+					<input type="number" required name="requisites" id="clientRequisitesId" placeholder="Реквизиты для договора">
+				</div>
+
+				<div>
+					<span>Сервер №1:</span>
+					<input type="number" required min="1" name="servNumber" id="servNumberId" placeholder="Количество">
+					<input type="text" required name="servName" id="servNameId" placeholder="Название">
+				</div>
+
+				<div>
+					<span>Количество ядер (2-144 шт.):</span>
+						<input type="range" id="coreinput" value="72" min="2" max="144" step="2" 
+								oninput="coreoutput.value = coreinput.value">
+						<input type="number" required name="core" id="coreoutput" oninput="coreinput.value = coreoutput.value">
+						<span>Цена по прайсу: <output id="coreRes">0</output>₽</span>
+				</div>
+
+				<div>
+					<span>Объём памяти (2-1024 gB):</span>
+						<input type="range"  id="raminput" value="512" min="2" max="1024" step="2" 
+								oninput="ramoutput.value = raminput.value">
+						<input type="number" required name="ram" id="ramoutput" oninput="raminput.value = ramoutput.value">
+						<span>Цена по прайсу: <output id="ramRes">0</output>₽</span>
+				</div>
+
+				<div>
+					<span>Объём дискового пространства SATA (2-512000 gB):</span>
+						<input type="range" id="satainput" value="256000" min="2" max="512000" step="2" 
+								oninput="sataoutput.value = satainput.value">
+						<input type="number" required name="sata" id="sataoutput" oninput="satainput.value = sataoutput.value">
+						<span>Цена по прайсу: <output id="sataRes">0</output>₽</span>
+				</div>
+
+				<div>
+					<span>Объём дискового пространства SAS (2-512000 gB):</span>
+						<input type="range" id="sasinput" value="256000" min="2" max="512000" step="2" 
+								oninput="sasoutput.value = sasinput.value">
+						<input type="number" required name="sas" id="sasoutput" oninput="sasinput.value = sasoutput.value">
+						<span>Цена по прайсу: <output id="sasRes">0</output>₽</span>
+				</div>
+
+				<div>
+					<span>Объём дискового пространства SSD (2-10240 gB):</span>
+						<input type="range" id="ssdinput" value="5120" min="2" max="10240" step="2" 
+								oninput="ssdoutput.value = ssdinput.value">
+						<input type="number" required name="ssd" id="ssdoutput" oninput="ssdinput.value = ssdoutput.value">
+						<span>Цена по прайсу: <output id="ssdRes">0</output>₽</span>
+				</div>
+
+				<div>
+					<span>Цена в месяц: <output id="result">0</output>₽</span>
+				</div>
+
+				<div>
+					<button name="addServ" type="submit" value="True">
+						Добавить сервер
+					</button>
+				</div>
+
+				<button name="genKP" type="submit" value="True">
+					Генерировать кп
+				</button>
+	
+				<button name="genContract" type="submit" value="True">
+					Генерировать договор на вр
+				</button>
+
+				<button name="save" type="submit" value="True">
+					Сохранить
+				</button>
+			</form>
+
 		</div>
 
-		<div>
-			<p>Объём памяти (2-1024 GB):</p>
-			<input type="range" id="raminput" value="512" min="2" max="1024" step="2"
-			   	oninput="ramoutput.value = raminput.value">
-			<input type="number" required name="ram" id="ramoutput" oninput="raminput.value = ramoutput.value">
-		</div>
+		<div class="menu">
 
-		<div>
-			<p>Объём дискового пространства SATA (2-512000 GB):</p>
-			<input type="range" id="satainput" value="256000" min="2" max="512000" step="2"
-			   	oninput="sataoutput.value = satainput.value">
-			<input type="number" required name="sata" id="sataoutput" oninput="satainput.value = sataoutput.value">
-		</div>
+			<form method="post" name="physical">
+				<h2>Конфигуратор физических ресурсов</h2>
 
-		<div>
-			<p>Объём дискового пространства SAS (2-512000 GB):</p>
-			<input type="range" id="sasinput" value="256000" min="2" max="512000" step="2"
-			   	oninput="sasoutput.value = sasinput.value">
-			<input type="number" required name="sas" id="sasoutput" oninput="sasinput.value = sasoutput.value">
-		</div>
+				<div>
+					<span>Стойка:</span>
+					<input type="number" required min="0" max="100" name="RENAAAAAME!!!!!!" id="RENAAAAAME!!!!!!" placeholder="100%">
+					<input type="number" required min="0" name="RENAAAAAME!!!!!!" id="RENAAAAAME!!!!!!" placeholder="Количество">
+					<span>Цена по прайсу: <output id="RENAAAAAME!!!!!!">0</output>₽</span>
+					&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+					<span>Энергоснабжение стоек, кВт:</span>
+					<input type="number" required name="RENAAAAAME!!!!!!" id="RENAAAAAME!!!!!!" placeholder="Мощность, кВт">
+					<span>Цена по прайсу: <output id="RENAAAAAME!!!!!!">0</output>₽</span>
+				</div>
 
-		<div>
-			<p>Объём дискового пространства SSD (2-10240 GB):</p>
-			<input type="range" id="ssdinput" value="5120" min="2" max="10240" step="2"
-			  	 oninput="ssdoutput.value = ssdinput.value">
-			<input type="number" required name="ssd" id="ssdoutput" oninput="ssdinput.value = ssdoutput.value">
-		</div>
+				<div>
+					<span>Юнит:</span>
+					<input type="number" required min="0" name="RENAAAAAME!!!!!!" id="RENAAAAAME!!!!!!" placeholder="Количество">
+					<span>Цена по прайсу: <output id="RENAAAAAME!!!!!!">0</output>₽</span>
+					&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+					<span>Энергоснабжение юнита, кВт:</span>
+					<input type="number" required name="RENAAAAAME!!!!!!" id="RENAAAAAME!!!!!!" placeholder="Мощность, кВт">
+					<span>Цена по прайсу: <output id="RENAAAAAME!!!!!!">0</output>₽</span>
+				</div>
 
-		<div>
-			<p>Цена в месяц: <output id="result">0</output>₽</p>
-		</div>
+				<div>
+					<span>Канал Internet, gBite/s:</span>
+					<input type="number" required min="0" name="RENAAAAAME!!!!!!" id="RENAAAAAME!!!!!!" placeholder="Количество">
+					<span>Цена по прайсу: <output id="RENAAAAAME!!!!!!">0</output>₽</span>
+				</div>
 
-		<div>
-			<button name="genKP" type="submit" value="True">
-				Генерировать кп
-			</button>
-		</div>
-		<div>
-			<button name="genContract" class="contact100-form-btn" type="submit" value="True">
-				Генерировать договор на вр
-			</button>
-		</div>
-	</form>
+				<div>
+					<span>Цена в месяц: <output id="RENAAAAAME!!!!!!">0</output>₽</span>
+				</div>
 
-</body>
+				<div>
+					<button name="RENAAAAAME!!!!!!" type="submit" value="True">
+						Сохранить
+					</button>
+				</div>
+
+				<button name="RENAAAAAME!!!!!!" type="submit" value="True">
+					Генерировать кп
+				</button>
+	
+				<button name="RENAAAAAME!!!!!!" type="submit" value="True">
+					Генерировать договор на вр
+				</button>
+			</form>
+		</div>
+	</body>
 </html>

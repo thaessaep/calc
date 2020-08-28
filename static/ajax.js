@@ -11,6 +11,11 @@ function sendRequest(){
             'sata': $('#sataoutput').val(),
             'sas': $('#sasoutput').val(),
             'ssd': $('#ssdoutput').val(),
+            'clientName': $('#clientNameId').val(),
+            'clientContract': $('#clientContractId').val(),
+            'clientRequisites': $('#clientRequisitesId').val(),
+            'servName': $('#servNameId').val(),
+            'servNumber': $('#servNumberId').val()
         },
         success: function (result) { // принимает значение с Python и парсит его
             result = $.parseJSON(result)
@@ -45,4 +50,5 @@ $(document).ready(function () { // когда документ готов к р�
 
     $('#ssdinput').change(sendRequest);
 
+    $('#servNumberId').change(sendRequest)
 })

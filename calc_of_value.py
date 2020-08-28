@@ -45,14 +45,16 @@ def find_name(xls, name):  # search name of column and return value
     return -1
 
 
-def switch_dict(xls, x, value):  # switch in python(return value with price of excel)
+def switch_dict(xls, x, value, servValue):  # switch in python(return value with price of excel)
     if x == "core":
-        return multiCore(xls, value)
+        return servValue * multiCore(xls, value)
     elif x == "ram":
-        return multiRAM(xls, value)
+        return servValue * multiRAM(xls, value)
     elif x == "sata":
-        return SXD(xls, value)
+        return servValue * SXD(xls, value)
     elif x == "sas":
-        return SXD(xls, value)
+        return servValue * SXD(xls, value)
     elif x == "ssd":
-        return SXD(xls, value)
+        return servValue * SXD(xls, value)
+    else:
+        return 0
