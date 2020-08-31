@@ -1,4 +1,4 @@
-from flask import request, send_from_directory, render_template
+from flask import request, send_from_directory, render_template, send_file
 import calc_of_value
 import pdfkit
 
@@ -25,9 +25,10 @@ def genPdf(html, pdf, filename):  # convert html in pdf
     pdfkit.from_file(html, pdf,
                      configuration=config,
                      options=options)
-    return send_from_directory(directory="pdf",  # return ready pdf
-                               filename=filename,
-                               mimetype='application/pdf')
+    return send_file("pdf/"+filename)
+    # return send_from_directory(directory="pdf",  # return ready pdf
+    #                            filename=filename,
+    #                            mimetype='application/pdf')
 
 
 def hddRes():
