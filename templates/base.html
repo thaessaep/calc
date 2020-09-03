@@ -15,69 +15,73 @@
 		<div class="menu">
 			<form method="post" name="virtual" id="virtualId">
 				<h2>Конфигуратор виртуальных ресурсов</h2>
-				
-				<div>
-					<span>Клиент:</span>
-					<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
-					<input type="number" required min="0" name="clientContract" id="clientContractId"
-						   placeholder="№ договора">
-					<input type="number" required name="requisites" id="clientRequisitesId"
-						   placeholder="Реквизиты для договора">
-				</div>
 
-				<div>
-					<span>Сервер №1:</span>
-					<input type="number" min="1" name="servNumber" id="servNumberId" placeholder="Количество">
-					<input type="text" required name="servName" id="servNameId" placeholder="Название">
-				</div>
+				<div class="virtual">
 
-				<div>
-					<span>Количество ядер (2-144 шт.):</span>
-						<input type="range" id="coreinput" value="72" min="2" max="144" step="2" 
-								oninput="coreoutput.value = coreinput.value">
-						<input type="number" required name="core" id="coreoutput"
-							   oninput="coreinput.value = coreoutput.value">
-						<span>Цена по прайсу: <output id="coreRes">0</output>₽</span>
-				</div>
+					<div class="client">
+						<span>Клиент:</span>
+						<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
+						<input type="number" required min="0" name="clientContract" id="clientContractId"
+						   	placeholder="№ договора">
+						<input type="number" required name="requisites" id="clientRequisitesId"
+						   	placeholder="Реквизиты для договора">
+					</div>
 
-				<div>
-					<span>Объём памяти (2-1024 gB):</span>
-						<input type="range"  id="raminput" value="512" min="2" max="1024" step="2" 
-								oninput="ramoutput.value = raminput.value">
-						<input type="number" required name="ram" id="ramoutput"
-							   oninput="raminput.value = ramoutput.value">
-						<span>Цена по прайсу: <output id="ramRes">0</output>₽</span>
-				</div>
+					<div class="serv">
+						<span class="server">Сервер №1:</span>
+						<input type="number" min="1" name="servNumber" id="servNumberId" placeholder="Количество">
+						<input type="text" required name="servName" id="servNameId" placeholder="Название">
+					</div>
 
-				<div>
-					<span>Объём дискового пространства SATA (2-512000 gB):</span>
-						<input type="range" id="satainput" value="256000" min="2" max="512000" step="2" 
-								oninput="sataoutput.value = satainput.value">
-						<input type="number" required name="sata" id="sataoutput"
-							   oninput="satainput.value = sataoutput.value">
-						<span>Цена по прайсу: <output id="sataRes">0</output>₽</span>
-				</div>
+					<div class="core">
+						<span>Количество ядер (2-144 шт.):</span>
+							<input class="input1" type="range" id="coreInput" value="72" min="2" max="144" step="2"
+									oninput="coreOutput.value = coreInput.value">
+							<input class="input2" type="number" required name="core" id="coreOutput"
+							   	oninput="coreInput.value = coreOutput.value">
+							<span class="coreRes">Цена по прайсу: <output id="coreRes">0</output>₽</span>
+					</div>
 
-				<div>
-					<span>Объём дискового пространства SAS (2-512000 gB):</span>
-						<input type="range" id="sasinput" value="256000" min="2" max="512000" step="2" 
-								oninput="sasoutput.value = sasinput.value">
-						<input type="number" required name="sas" id="sasoutput"
-							   oninput="sasinput.value = sasoutput.value">
-						<span>Цена по прайсу: <output id="sasRes">0</output>₽</span>
-				</div>
+					<div class="ram">
+						<span>Объём памяти (2-1024 gB):</span>
+							<input type="range"  id="raminput" value="512" min="2" max="1024" step="2"
+									oninput="ramoutput.value = raminput.value">
+							<input type="number" required name="ram" id="ramoutput"
+								   oninput="raminput.value = ramoutput.value">
+							<span>Цена по прайсу: <output id="ramRes">0</output>₽</span>
+					</div>
 
-				<div>
-					<span>Объём дискового пространства SSD (2-10240 gB):</span>
-						<input type="range" id="ssdinput" value="5120" min="2" max="10240" step="2" 
+					<div class="sata">
+						<span>Объём дискового пространства SATA (2-512000 gB):</span>
+							<input type="range" id="satainput" value="256000" min="2" max="512000" step="2"
+									oninput="sataoutput.value = satainput.value">
+							<input type="number" required name="sata" id="sataoutput"
+							   	oninput="satainput.value = sataoutput.value">
+							<span>Цена по прайсу: <output id="sataRes">0</output>₽</span>
+					</div>
+
+					<div class="sas">
+						<span>Объём дискового пространства SAS (2-512000 gB):</span>
+							<input type="range" id="sasinput" value="256000" min="2" max="512000" step="2"
+									oninput="sasoutput.value = sasinput.value">
+							<input type="number" required name="sas" id="sasoutput"
+							   	oninput="sasinput.value = sasoutput.value">
+							<span>Цена по прайсу: <output id="sasRes">0</output>₽</span>
+					</div>
+
+					<div class="ssd">
+						<span>Объём дискового пространства SSD (2-10240 gB):</span>
+							<input type="range" id="ssdinput" value="5120" min="2" max="10240" step="2"
 								oninput="ssdoutput.value = ssdinput.value">
-						<input type="number" required name="ssd" id="ssdoutput"
+							<input type="number" required name="ssd" id="ssdoutput"
 							   oninput="ssdinput.value = ssdoutput.value">
-						<span>Цена по прайсу: <output id="ssdRes">0</output>₽</span>
-				</div>
+							<span>Цена по прайсу: <output id="ssdRes">0</output>₽</span>
+					</div>
 
-				<div>
-					<span>Цена в месяц: <output id="result">0</output>₽</span>
+					<div class="res">
+						<span>Цена в месяц: <output id="result">0</output>₽</span>
+					</div>
+
 				</div>
 
 				<div>

@@ -25,10 +25,7 @@ def genPdf(html, pdf, filename):  # convert html in pdf
     pdfkit.from_file(html, pdf,
                      configuration=config,
                      options=options)
-    return send_file("pdf/"+filename)
-    # return send_from_directory(directory="pdf",  # return ready pdf
-    #                            filename=filename,
-    #                            mimetype='application/pdf')
+    return send_file("pdf/"+filename, as_attachment=True)
 
 
 def hddRes():

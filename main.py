@@ -7,6 +7,38 @@ import calc_of_value
 app = Flask(__name__)
 
 
+def switchData():
+    if request.form['core'] != '':
+        coreRes = calc_of_value.multiCore(xls, int(request.form['core']))
+    else:
+        coreRes = 0
+    if request.form['ram'] != '':
+        ramRes = calc_of_value.multiRAM(xls, int(request.form['ram']))
+    else:
+        ramRes = 0
+    if request.form['sata'] != '':
+        sataRes = calc_of_value.SXD(xls, int(request.form['sata']))
+    else:
+        sataRes = 0
+    if request.form['sas'] != '':
+        sasRes = calc_of_value.SXD(xls, int(request.form['sas']))
+    else:
+        sasRes = 0
+    if request.form['ssd'] != '':
+        ssdRes = calc_of_value.SXD(xls, int(request.form['ssd']))
+    else:
+        ssdRes = 0
+    data = {
+        "result": generation.total(xls),
+        "coreRes": coreRes,
+        "ramRes": ramRes,
+        "sataRes": sataRes,
+        "sasRes": sasRes,
+        "ssdRes": ssdRes
+    }
+    return data
+
+
 @app.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "POST":
@@ -25,34 +57,7 @@ def post():
                 return generation.genContract(request.form['core']
                                               , request.form['ram'], request.form['clientContract'])
     else:  # if user write value
-        if request.form['core'] != '':
-            coreRes = calc_of_value.multiCore(xls, int(request.form['core']))
-        else:
-            coreRes = 0
-        if request.form['ram'] != '':
-            ramRes = calc_of_value.multiRAM(xls, int(request.form['ram']))
-        else:
-            ramRes = 0
-        if request.form['sata'] != '':
-            sataRes = calc_of_value.SXD(xls, int(request.form['sata']))
-        else:
-            sataRes = 0
-        if request.form['sas'] != '':
-            sasRes = calc_of_value.SXD(xls, int(request.form['sas']))
-        else:
-            sasRes = 0
-        if request.form['ssd'] != '':
-            ssdRes = calc_of_value.SXD(xls, int(request.form['ssd']))
-        else:
-            ssdRes = 0
-        data = {
-            "result": generation.total(xls),
-            "coreRes": coreRes,
-            "ramRes": ramRes,
-            "sataRes": sataRes,
-            "sasRes": sasRes,
-            "ssdRes": ssdRes
-        }
+        data = switchData()
         return json.dumps(data)  # return result of values
 
 
