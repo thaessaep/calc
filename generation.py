@@ -33,16 +33,6 @@ def hddRes():
     return hdd
 
 
-def total(xls):  # total payment amount
-    result = 0
-    if "servNumber" in request.form and request.form["servNumber"] != '':  # check servNumber
-        servValue = int(request.form["servNumber"])
-    else:
-        servValue = 1
-    for i in request.form:
-        if request.form[i] != '' and (i == 'core' or i == 'ram' or i == 'sas'
-                                      or i == 'sata' or i == 'ssd'):  # check button(genKp...) and value
-            result += calc_of_value.switch_dict(xls, i, int(request.form[i]), servValue)
-        else:
-            continue
+def total(value, servValue):  # total payment amount
+    result = value * servValue
     return result

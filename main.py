@@ -8,28 +8,60 @@ app = Flask(__name__)
 
 
 def switchData():
-    if request.form['core'] != '':
-        coreRes = calc_of_value.multiCore(xls, int(request.form['core']))
-    else:
-        coreRes = 0
-    if request.form['ram'] != '':
-        ramRes = calc_of_value.multiRAM(xls, int(request.form['ram']))
-    else:
-        ramRes = 0
-    if request.form['sata'] != '':
-        sataRes = calc_of_value.SXD(xls, int(request.form['sata']))
-    else:
-        sataRes = 0
-    if request.form['sas'] != '':
-        sasRes = calc_of_value.SXD(xls, int(request.form['sas']))
-    else:
-        sasRes = 0
-    if request.form['ssd'] != '':
-        ssdRes = calc_of_value.SXD(xls, int(request.form['ssd']))
-    else:
-        ssdRes = 0
+    totalLength = 0
+    core = request.form.getlist(key='core[]')
+    ram = request.form.getlist(key='ram[]')
+    sata = request.form.getlist(key='sata[]')
+    sas = request.form.getlist(key='sas[]')
+    ssd = request.form.getlist(key='ssd[]')
+    servNumber = request.form.getlist(key='servNumber[]')
+    coreRes = []
+    ramRes = []
+    sataRes = []
+    sasRes = []
+    ssdRes = []
+    result = []
+    servRes = []
+
+    for i in core:
+        totalLength += 1
+        if i != '':
+            coreRes.append(calc_of_value.multiCore(xls, int(i)))
+        else:
+            coreRes.append(0)
+    for i in ram:
+        if i != '':
+            ramRes.append(calc_of_value.multiRAM(xls, int(i)))
+        else:
+            ramRes.append(0)
+    for i in sata:
+        if i != '':
+            sataRes.append(calc_of_value.SXD(xls, int(i)))
+        else:
+            sataRes.append(0)
+    for i in sas:
+        if i != '':
+            sasRes.append(calc_of_value.SXD(xls, int(i)))
+        else:
+            sasRes.append(0)
+    for i in ssd:
+        if i != '':
+            ssdRes.append(calc_of_value.SXD(xls, int(i)))
+        else:
+            ssdRes.append(0)
+
+    for i in servNumber:
+        if i != '':
+            servRes.append(int(i))
+        else:
+            servRes.append(1)
+
+    for i in range(0, totalLength):
+        res = coreRes[i] + ramRes[i] + sataRes[i] + sasRes[i] + ssdRes[i]
+        result.append(generation.total(res, servRes[i]))
+
     data = {
-        "result": generation.total(xls),
+        "result": result,
         "coreRes": coreRes,
         "ramRes": ramRes,
         "sataRes": sataRes,

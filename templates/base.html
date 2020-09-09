@@ -16,70 +16,74 @@
 			<form method="post" name="virtual" id="virtualId">
 				<h2>Конфигуратор виртуальных ресурсов</h2>
 
-				<div class="virtual">
+				<div id="queue">
 
-					<div class="client">
-						<span>Клиент:</span>
-						<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
-						<input type="number" required min="0" name="clientContract" id="clientContractId"
-						   	placeholder="№ договора">
-						<input type="number" required name="requisites" id="clientRequisitesId"
-						   	placeholder="Реквизиты для договора">
-					</div>
+					<div id="duplicate">
 
-					<div class="serv">
-						<span class="server">Сервер №1:</span>
-						<input type="number" min="1" name="servNumber" id="servNumberId" placeholder="Количество">
-						<input type="text" required name="servName" id="servNameId" placeholder="Название">
-					</div>
+						<div id="clientId">
+							<span>Клиент:</span>
+							<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
+							<input type="number" required min="0" name="clientContract" id="clientContractId"
+						   		placeholder="№ договора">
+							<input type="number" required name="requisites" id="clientRequisitesId"
+						   		placeholder="Реквизиты для договора">
+						</div>
 
-					<div class="core">
-						<span>Количество ядер (2-144 шт.):</span>
-							<input class="input1" type="range" id="coreInput" value="72" min="2" max="144" step="2"
-									oninput="coreOutput.value = coreInput.value">
-							<input class="input2" type="number" required name="core" id="coreOutput"
-							   	oninput="coreInput.value = coreOutput.value">
-							<span class="coreRes">Цена по прайсу: <output id="coreRes">0</output>₽</span>
-					</div>
+						<div id="servId">
+							<span class="server">Сервер №1:</span>
+							<input type="number" min="1" name="servNumber" id="servNumberId" placeholder="Количество">
+							<input type="text" required name="servName" id="servNameId" placeholder="Название">
+						</div>
 
-					<div class="ram">
-						<span>Объём памяти (2-1024 gB):</span>
-							<input type="range"  id="raminput" value="512" min="2" max="1024" step="2"
-									oninput="ramoutput.value = raminput.value">
-							<input type="number" required name="ram" id="ramoutput"
-								   oninput="raminput.value = ramoutput.value">
-							<span>Цена по прайсу: <output id="ramRes">0</output>₽</span>
-					</div>
+						<div id="coreId">
+							<span>Количество ядер (2-144 шт.):</span>
+								<input type="range" id="coreInput" value="72" min="2" max="144" step="2"
+										oninput="coreOutput.value = coreInput.value">
+								<input type="number" name=core"" id="coreOutput" required
+							   		oninput="coreInput.value = coreOutput.value">
+								<span class="coreRes">Цена по прайсу: <output id="coreRes">0</output>₽</span>
+						</div>
 
-					<div class="sata">
-						<span>Объём дискового пространства SATA (2-512000 gB):</span>
-							<input type="range" id="satainput" value="256000" min="2" max="512000" step="2"
-									oninput="sataoutput.value = satainput.value">
-							<input type="number" required name="sata" id="sataoutput"
-							   	oninput="satainput.value = sataoutput.value">
-							<span>Цена по прайсу: <output id="sataRes">0</output>₽</span>
-					</div>
+						<div id="ramId">
+							<span>Объём памяти (2-1024 gB):</span>
+								<input type="range"  id="ramInput" value="512" min="2" max="1024" step="2"
+										oninput="ramOutput.value = ramInput.value">
+								<input type="number" required name="ram" id="ramOutput"
+								   	oninput="ramInput.value = ramOutput.value">
+								<span>Цена по прайсу: <output id="ramRes">0</output>₽</span>
+						</div>
 
-					<div class="sas">
-						<span>Объём дискового пространства SAS (2-512000 gB):</span>
-							<input type="range" id="sasinput" value="256000" min="2" max="512000" step="2"
-									oninput="sasoutput.value = sasinput.value">
-							<input type="number" required name="sas" id="sasoutput"
-							   	oninput="sasinput.value = sasoutput.value">
-							<span>Цена по прайсу: <output id="sasRes">0</output>₽</span>
-					</div>
+						<div id="sataId">
+							<span>Объём дискового пространства SATA (2-512000 gB):</span>
+								<input type="range" id="sataInput" value="256000" min="2" max="512000" step="2"
+										oninput="sataOutput.value = sataInput.value">
+								<input type="number" required name="sata" id="sataOutput"
+							   		oninput="sataInput.value = sataOutput.value">
+								<span>Цена по прайсу: <output id="sataRes">0</output>₽</span>
+						</div>
 
-					<div class="ssd">
-						<span>Объём дискового пространства SSD (2-10240 gB):</span>
-							<input type="range" id="ssdinput" value="5120" min="2" max="10240" step="2"
-								oninput="ssdoutput.value = ssdinput.value">
-							<input type="number" required name="ssd" id="ssdoutput"
-							   oninput="ssdinput.value = ssdoutput.value">
-							<span>Цена по прайсу: <output id="ssdRes">0</output>₽</span>
-					</div>
+						<div id="sasId">
+							<span>Объём дискового пространства SAS (2-512000 gB):</span>
+								<input type="range" id="sasInput" value="256000" min="2" max="512000" step="2"
+										oninput="sasOutput.value = sasInput.value">
+								<input type="number" required name="sas" id="sasOutput"
+							   		oninput="sasInput.value = sasOutput.value">
+								<span>Цена по прайсу: <output id="sasRes">0</output>₽</span>
+						</div>
 
-					<div class="res">
-						<span>Цена в месяц: <output id="result">0</output>₽</span>
+						<div id="ssdId">
+							<span>Объём дискового пространства SSD (2-10240 gB):</span>
+								<input type="range" id="ssdInput" value="5120" min="2" max="10240" step="2"
+									oninput="ssdOutput.value = ssdInput.value">
+								<input type="number" required name="ssd" id="ssdOutput"
+							   	oninput="ssdInput.value = ssdOutput.value">
+								<span>Цена по прайсу: <output id="ssdRes">0</output>₽</span>
+						</div>
+
+						<div id="resId">
+							<span>Цена в месяц: <output id="result">0</output>₽</span>
+						</div>
+
 					</div>
 
 				</div>
