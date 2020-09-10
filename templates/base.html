@@ -18,16 +18,16 @@
 
 				<div id="queue">
 
-					<div id="duplicate">
+					<div id="clientId">
+						<span>Клиент:</span>
+						<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
+						<input type="number" required min="0" name="clientContract" id="clientContractId"
+							   placeholder="№ договора">
+						<input type="number" required name="requisites" id="clientRequisitesId"
+							   placeholder="Реквизиты для договора">
+					</div>
 
-						<div id="clientId">
-							<span>Клиент:</span>
-							<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
-							<input type="number" required min="0" name="clientContract" id="clientContractId"
-						   		placeholder="№ договора">
-							<input type="number" required name="requisites" id="clientRequisitesId"
-						   		placeholder="Реквизиты для договора">
-						</div>
+					<div id="duplicate">
 
 						<div id="servId">
 							<span class="server">Сервер №1:</span>

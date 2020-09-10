@@ -113,6 +113,7 @@ function addServ(){
 function sendRequest(){
 
     let coreOutput = [], ramOutput = [], sataOutput = [], sasOutput = [], ssdOutput = [], servNumber = [];
+    let servNameId = [];
 
     for(let i = 0; i <= number; i++){  // push elements in array
         if(i == 0){
@@ -122,6 +123,7 @@ function sendRequest(){
             sasOutput.push($('#sasOutput').val());
             ssdOutput.push($('#ssdOutput').val());
             servNumber.push($('#servNumberId').val());
+            servNameId.push($('#servNameId').val());
         }
         else {
             coreOutput.push($('#coreOutput' + i).val());
@@ -130,6 +132,7 @@ function sendRequest(){
             sasOutput.push($('#sasOutput' + i).val());
             ssdOutput.push($('#ssdOutput' + i).val());
             servNumber.push($('#servNumberId' + i).val());
+            servNameId.push($('#servNameId' + i).val());
         }
     }
 
@@ -143,10 +146,10 @@ function sendRequest(){
             'sas': sasOutput,
             'ssd': ssdOutput,
             'servNumber': servNumber,
+            'servName': servNameId,
             'clientName': $('#clientNameId').val(),
             'clientContract': $('#clientContractId').val(),
             'clientRequisites': $('#clientRequisitesId').val(),
-            'servName': $('#servNameId').val(),
         },
         success: function (res) { // принимает значение с Python и парсит его
             res = $.parseJSON(res)

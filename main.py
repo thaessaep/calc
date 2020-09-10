@@ -66,7 +66,8 @@ def switchData():
         "ramRes": ramRes,
         "sataRes": sataRes,
         "sasRes": sasRes,
-        "ssdRes": ssdRes
+        "ssdRes": ssdRes,
+        "totalLength": totalLength
     }
     return data
 
@@ -82,9 +83,9 @@ def index():
 def post():
     for key in request.form:
         if request.form[key] == 'True':  # if was click on button
+            data = switchData()  # доделать
             if key == 'genKP':
-                return generation.genKP(request.form['core'], request.form['ram']
-                                        , generation.total(xls), request.form['clientName'])
+                return generation.genKP(data, request.form['clientName'])
             elif key == 'genContract':
                 return generation.genContract(request.form['core']
                                               , request.form['ram'], request.form['clientContract'])

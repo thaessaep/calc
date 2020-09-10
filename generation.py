@@ -3,10 +3,10 @@ import calc_of_value
 import pdfkit
 
 
-def genKP(core, ram, price, clientName):
+def genKP(data, clientName):
     doc = open("templates/MainDataNetResult.html", "w", encoding="UTF-8")  # open and write new html
-    doc.write(render_template("MainDataNet.html", core=core, ram=ram
-                              , hdd=hddRes(), price=price, clientName=clientName)+"")
+    doc.write(render_template("MainDataNet.html", core=data['coreRes'], ram=data['ramRes'], hdd=hddRes(data),
+                              price=data['result'], clientName=clientName)+"")
     doc.close()
     return genPdf("templates/MainDataNetResult.html", "pdf/MainDataNetResult.pdf", "MainDataNetResult.pdf")
 
@@ -28,9 +28,15 @@ def genPdf(html, pdf, filename):  # convert html in pdf
     return send_file("pdf/"+filename, as_attachment=True)
 
 
-def hddRes():
-    hdd = int(request.form['sata']) + int(request.form['sas']) + int(request.form['ssd'])
-    return hdd
+def hddRes(data):
+    # coreRes = data['coreRes']
+    # ramRes = data["ramRes"]
+    # sataRes = data["sataRes"]
+    # sasRes = data["sasRes"]
+    # ssdRes = data["ssdRes"]
+    for i in range(0, data['totalLength']):
+        hdd = data["sataRes"][i] + data["sasRes"][i] + data["ssdRes"][i]
+        return hdd
 
 
 def total(value, servValue):  # total payment amount
