@@ -30,7 +30,7 @@
 					<div id="duplicate">
 
 						<div id="servId">
-							<span class="server">Сервер №1:</span>
+							<span class="server">Сервер №<output id="servNumerous">1</output>:</span>
 							<input type="number" min="1" name="servNumber" id="servNumberId" placeholder="Количество">
 							<input type="text" required name="servName" id="servNameId" placeholder="Название">
 						</div>
@@ -39,7 +39,7 @@
 							<span>Количество ядер (2-144 шт.):</span>
 								<input type="range" id="coreInput" value="72" min="2" max="144" step="2"
 										oninput="coreOutput.value = coreInput.value">
-								<input type="number" name=core"" id="coreOutput" required
+								<input type="number" name="core" id="coreOutput" required
 							   		oninput="coreInput.value = coreOutput.value">
 								<span class="coreRes">Цена по прайсу: <output id="coreRes">0</output>₽</span>
 						</div>
@@ -94,9 +94,9 @@
 					</button>
 				</div>
 
-				<a href="/pdf"> <button name="genKP" id="genKPId" type="submit" value="True">
+				<button name="genKP" id="genKPId" type="submit" value="True">
 					Генерировать кп
-				</button></a>
+				</button>
 	
 				<button name="genContract" type="submit" value="True">
 					Генерировать договор на вр

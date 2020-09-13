@@ -1,5 +1,4 @@
 
-
 def multiCore(xls, numerous):  # result price for cores
     value = find_name(xls, "Ядра")
     res = numerous * value

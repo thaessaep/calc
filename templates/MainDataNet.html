@@ -33,11 +33,14 @@
 {{ price }} тыс. рублей в месяц.</P>
 <P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in">Арендуемая
 конфигурация включает в себя следующее:</P>
-<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in">Количество ядер: {{ core }} ,
-	{{ ram }} ГБ ОЗУ, {{ hdd }} ТБ HDD и единая
+	{% for i in range(0, length) %}
+	<P>Сервер №{{ servNumerous[i] }}(Количество = {{ servNumber[i] }})</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in">Количество ядер: {{ core[i] }} ,
+	{{ ram[i] }} ГБ ОЗУ, {{ hdd[i] }} ТБ HDD и единая
 централизованная платформа для
 мониторинга и управления серверами 
 </P>
+	{% endfor %}
 <P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in">Каналы
 связи до серверов шириной 100Мб входят
 в стоимость, скорость можем увеличить

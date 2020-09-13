@@ -12,23 +12,12 @@ function addServ(){
 
         let newId = this.id + number;
 
-        //client
-        if(this.id == 'clientNameId'){
-            $(this).attr({'id': newId, 'name': this.name+number});
-        }
-        else if(this.id == 'clientContractId'){
-            $(this).attr({'id': newId, 'name': this.name+number});
-        }
-        else if(this.id == 'clientRequisitesId'){
-            $(this).attr({'id': newId, 'name': this.name+number});
-        }
-
         //serv
-        else if(this.id == 'servNumberId'){
+        if(this.id == 'servNumberId' || this.id == 'servNameId'){
             $(this).attr({'id': newId, 'name': this.name+number});
         }
-        else if(this.id == 'servNameId'){
-            $(this).attr({'id': newId, 'name': this.name+number});
+        else if(this.id == 'servNumerous'){
+            $(this).attr('id', newId);
         }
 
         //core
@@ -82,26 +71,11 @@ function addServ(){
         }
 
         //result
-        else if(this.id == 'coreRes'){
-            $(this).attr('id', newId);
-        }
-        else if(this.id == 'ramRes'){
-            $(this).attr('id', newId);
-        }
-        else if(this.id == 'sataRes'){
-            $(this).attr('id', newId);
-        }
-        else if(this.id == 'sasRes'){
-            $(this).attr('id', newId);
-        }
-        else if(this.id == 'ssdRes'){
-            $(this).attr('id', newId);
-        }
-        else if(this.id == 'result'){
+        else if(this.id == 'coreRes' || this.id == 'ramRes' || this.id == 'sataRes' || this.id == 'sasRes'
+            || this.id == 'ssdRes' || this.id == 'result'){
             $(this).attr('id', newId);
         }
 
-        console.log(this.id)
 
     }).end()
 
@@ -112,28 +86,20 @@ function addServ(){
 
 function sendRequest(){
 
-    let coreOutput = [], ramOutput = [], sataOutput = [], sasOutput = [], ssdOutput = [], servNumber = [];
-    let servNameId = [];
-
+    let coreOutput = [], ramOutput = [], sataOutput = [], sasOutput = [], ssdOutput = [];
+    let servNameId = [], servNumber = [];
+    let value = "";
     for(let i = 0; i <= number; i++){  // push elements in array
-        if(i == 0){
-            coreOutput.push($('#coreOutput').val());
-            ramOutput.push($('#ramOutput').val());
-            sataOutput.push($('#sataOutput').val());
-            sasOutput.push($('#sasOutput').val());
-            ssdOutput.push($('#ssdOutput').val());
-            servNumber.push($('#servNumberId').val());
-            servNameId.push($('#servNameId').val());
+        if(i > 0){
+            value = i
         }
-        else {
-            coreOutput.push($('#coreOutput' + i).val());
-            ramOutput.push($('#ramOutput' + i).val());
-            sataOutput.push($('#sataOutput' + i).val());
-            sasOutput.push($('#sasOutput' + i).val());
-            ssdOutput.push($('#ssdOutput' + i).val());
-            servNumber.push($('#servNumberId' + i).val());
-            servNameId.push($('#servNameId' + i).val());
-        }
+        coreOutput.push($('#coreOutput' + value).val());
+        ramOutput.push($('#ramOutput' + value).val());
+        sataOutput.push($('#sataOutput' + value).val());
+        sasOutput.push($('#sasOutput' + value).val());
+        ssdOutput.push($('#ssdOutput' + value).val());
+        servNumber.push($('#servNumberId' + value).val());
+        servNameId.push($('#servNameId' + value).val());
     }
 
     $.ajax({
@@ -147,11 +113,13 @@ function sendRequest(){
             'ssd': ssdOutput,
             'servNumber': servNumber,
             'servName': servNameId,
+            'totalLength': number + 1,
             'clientName': $('#clientNameId').val(),
             'clientContract': $('#clientContractId').val(),
             'clientRequisites': $('#clientRequisitesId').val(),
         },
         success: function (res) { // принимает значение с Python и парсит его
+            let value = ""
             res = $.parseJSON(res)
             result = res["result"]
             coreRes = res["coreRes"]
@@ -161,21 +129,15 @@ function sendRequest(){
             ssdRes = res["ssdRes"]
             for(let i = 0; i <= number; i++) {  // all results
                 if (i > 0) {
-                    $('#result' + i).text(result[i])
-                    $('#coreRes' + i).text(coreRes[i])
-                    $('#ramRes' + i).text(ramRes[i])
-                    $('#sataRes' + i).text(sataRes[i])
-                    $('#sasRes'+ i).text(sasRes[i])
-                    $('#ssdRes'+ i).text(ssdRes[i])
+                    value = i
                 }
-                else {
-                    $('#result').text(result[0])
-                    $('#coreRes').text(coreRes[0])
-                    $('#ramRes').text(ramRes[0])
-                    $('#sataRes').text(sataRes[0])
-                    $('#sasRes').text(sasRes[0])
-                    $('#ssdRes').text(ssdRes[0])
-                }
+                $('#result' + value).text(result[i])
+                $('#coreRes' + value).text(coreRes[i])
+                $('#ramRes' + value).text(ramRes[i])
+                $('#sataRes' + value).text(sataRes[i])
+                $('#sasRes'+ value).text(sasRes[i])
+                $('#ssdRes'+ value).text(ssdRes[i])
+                $('#servNumerous' + value).text(i + 1)
             }
         },
         error: function () { // выводит ошибку, если значение не дошло до функции
@@ -209,5 +171,22 @@ $(document).ready(function () { // когда документ готов к р�
 
     $('#servNumberId').change(sendRequest);
 
-    $('#addServId').click(addServ);
+    $('#addServId').click(function (){
+        addServ();
+        $.ajax({
+            url: "http://127.0.0.1:5000/",
+            method: "POST",
+            success: function (){
+                let value = "";
+                for(let i = 0; i <= number; i++) {  // all results
+                    if (i > 0) {
+                        value = i
+                    }
+                    $('#servNumerous' + value).text(i + 1)
+                }
+            }
+        })
+
+    });
+
 })
