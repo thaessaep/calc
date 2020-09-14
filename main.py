@@ -18,13 +18,11 @@ def index():
 def post():
     for key in request.form:
         if request.form[key] == 'True':  # if was click on button
-            data = createData.pdfData()
+            data = createData.pdfData(xls)
             if key == 'genKP':
-                return generation.genKP(xls, data, request.form['clientName'])
+                return generation.genKP(data, request.form['clientName'])
             elif key == 'genContract':
                 return generation.genContract(data, request.form['clientContract'])
-            elif key == 'addServ':
-                break
     else:  # if user write value
         data = createData.switchData(xls)
         return json.dumps(data)  # return result of values

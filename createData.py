@@ -67,7 +67,8 @@ def switchData(xls):
     return data
 
 
-def pdfData():  # доделать
+def pdfData(xls):  # доделать
+    result = 0
     length = 0
     value = ""
     for i in request.form:
@@ -97,6 +98,11 @@ def pdfData():  # доделать
         else:
             servNumberId.append(int(request.form['servNumber' + value]))
 
+    for i in range(0, length):
+        res = calc_of_value.multiCore(xls, coreRes[i]) + calc_of_value.multiRAM(xls, ramRes[i]) + \
+              calc_of_value.SXD(xls, sataRes[i]) + calc_of_value.SXD(xls, sasRes[i]) + calc_of_value.SXD(xls, ssdRes[i])
+        result += res
+
     data = {
         "core": coreRes,
         "ram": ramRes,
@@ -105,7 +111,8 @@ def pdfData():  # доделать
         "ssd": ssdRes,
         "totalLength": length,
         "servNumerous": servNumerous,
-        "servNumber": servNumberId
+        "servNumber": servNumberId,
+        "result": result
     }
     return data
 

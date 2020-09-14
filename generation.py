@@ -3,10 +3,10 @@ import calc_of_value
 import pdfkit
 
 
-def genKP(xls, data, clientName):
+def genKP(data, clientName):
     doc = open("templates/MainDataNetResult.html", "w", encoding="UTF-8")  # open and write new html
     doc.write(render_template("MainDataNet.html", core=data['core'], ram=data['ram'], hdd=hddRes(data),
-                              price=resultPdf(xls, data), length=data['totalLength'], servNumerous=data['servNumerous'],
+                              price=data['result'], length=data['totalLength'], servNumerous=data['servNumerous'],
                               clientName=clientName, servNumber=data['servNumber']) + "")
     doc.close()
     return genPdf("templates/MainDataNetResult.html", "pdf/MainDataNetResult.pdf", "MainDataNetResult.pdf")
@@ -35,12 +35,3 @@ def hddRes(data):
     for i in range(0, data['totalLength']):
         hdd.append(data["sata"][i] + data["sas"][i] + data["ssd"][i])
     return hdd
-
-
-def resultPdf(xls, data):
-    result = 0
-    for i in range(0, data['totalLength']):
-        hdd = calc_of_value.SXD(xls, data["sata"][i]) + \
-            calc_of_value.SXD(xls, data["sas"][i]) + calc_of_value.SXD(xls, data["ssd"][i])
-        result += calc_of_value.multiCore(xls, data['core'][i]) + calc_of_value.multiRAM(xls, data['ram'][i]) + hdd
-    return result
