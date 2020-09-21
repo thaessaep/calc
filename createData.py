@@ -2,7 +2,7 @@ import calc_of_value
 from flask import request
 
 
-def switchData(xls):
+def switchData(xls):  # generation value for calculate value
     totalLength = 0
     core = request.form.getlist(key='core[]')
     ram = request.form.getlist(key='ram[]')
@@ -67,7 +67,7 @@ def switchData(xls):
     return data
 
 
-def pdfData(xls):  # доделать
+def pdfData(xls):  # generation value for print pdf
     result = 0
     length = 0
     value = ""
@@ -101,7 +101,7 @@ def pdfData(xls):  # доделать
     for i in range(0, length):
         res = calc_of_value.multiCore(xls, coreRes[i]) + calc_of_value.multiRAM(xls, ramRes[i]) + \
               calc_of_value.SXD(xls, sataRes[i]) + calc_of_value.SXD(xls, sasRes[i]) + calc_of_value.SXD(xls, ssdRes[i])
-        result += res
+        result += total(res, servNumberId[i])
 
     data = {
         "core": coreRes,

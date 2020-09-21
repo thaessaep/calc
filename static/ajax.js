@@ -8,7 +8,7 @@ function addServ(){
 
     let input = $('#duplicate').clone(true);
 
-    let resInput = input.clone(true).find(':input, output').each(function(){ // clone part of html
+    let resInput = input.clone(true).find(':input, output').val("").each(function(){ // clone part of html
 
         let newId = this.id + number;
 
