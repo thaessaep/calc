@@ -19,7 +19,7 @@ DATABASE = {
     'host': 'localhost',
     'port': '5432',
     'username': 'postgres',
-    'password': 'VjqGfhjkm',
+    'password': 'Kjk1914',
     'database': 'postgres'
 }
 
@@ -30,11 +30,15 @@ def createBase(clientName, filePath, fileType):
     con = psycopg2.connect(
         database="postgres",
         user="postgres",
-        password="VjqGfhjkm",
+        password="Kjk1914",
         host="127.0.0.1",
         port="5432",
     )
     cur = con.cursor()  # create cursor
+    # cur.execute(
+    #     "DELETE FROM filepath *;"  # delete all record
+    #     "ALTER SEQUENCE filepath_id_seq RESTART WITH 1"  # reboot counter id
+    # )
     cur.execute(
         "SELECT id, client_name FROM filepath", {'clientName': clientName}
     )
@@ -43,7 +47,7 @@ def createBase(clientName, filePath, fileType):
     if check['value'] == 1:
         switchUpdate(cur, fileType, filePath, check)
     else:
-        switchInsert(cur, fileType, filePath, check)
+        switchInsert(cur, fileType, clientName, filePath)
     con.commit()
     con.close()
 
@@ -76,7 +80,9 @@ def switchInsert(cur, fileType, clientName, filePath):
 
 
 def checkTable(name, clientName):
+    if len(name) == 0:
+        return {'value': 0}
     for i in range(0, len(name)):
         if name[i][1] == clientName:  # 1 = column of client_name
             return {'value': 1, 'clientId': name[i][0]}  # second i = column of id
-    return {'value': 0, 'clientId': name[i][0]}
+    return {'value': 0}

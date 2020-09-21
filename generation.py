@@ -18,7 +18,8 @@ def genContract(data, clientContract, clientName):
     doc = open("templates/virtual_serv_result.html", "w", encoding="UTF-8")
     doc.write(render_template("virtual_serv.html", core=data['core'], ram=data['ram'], servNumerous=data['servNumerous']
                               , hdd=hddRes(data), length=data['totalLength'],
-                              clientContract=clientContract, servNumber=data['servNumber']) + "")
+                              clientContract=clientContract, servNumber=data['servNumber'],
+                              servName=data['servName']) + "")
     doc.close()
     return genPdf(clientName, "templates/virtual_serv_result.html", "pdf/"+clientContract+"CONT.pdf",
                   clientContract+"CONT.pdf", "CONT")

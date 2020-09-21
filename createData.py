@@ -82,6 +82,7 @@ def pdfData(xls):  # generation value for print pdf
     ssdRes = []
     servNumerous = []
     servNumberId = []
+    servName = []
     for i in range(0, length):
         if i > 0:
             value = str(i)
@@ -92,6 +93,7 @@ def pdfData(xls):  # generation value for print pdf
         sataRes.append(int(request.form['sata' + value]))
         sasRes.append(int(request.form['sas' + value]))
         ssdRes.append(int(request.form['ssd' + value]))
+        servName.append(request.form['servName' + value])
         servNumerous.append(i + 1)
         if request.form['servNumber' + value] == "":
             servNumberId.append(1)
@@ -112,6 +114,7 @@ def pdfData(xls):  # generation value for print pdf
         "totalLength": length,
         "servNumerous": servNumerous,
         "servNumber": servNumberId,
+        'servName': servName,
         "result": result
     }
     return data

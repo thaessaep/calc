@@ -17,6 +17,7 @@
 <BR>
 </P>
 <P ALIGN=CENTER STYLE="margin-bottom: 0in; line-height: 100%; widows: 0; orphans: 0">
+<P ALIGN=CENTER STYLE="margin-bottom: 0in; line-height: 100%; widows: 0; orphans: 0">
 <FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=2><I><SPAN STYLE="font-weight: normal">Российская
 Федерация, город Омск                              
   «__» ________________ 2020 года</SPAN></I></FONT></FONT></FONT></P>
@@ -980,5 +981,67 @@
 			</TD>
 		</TR>
 	</TABLE>
+
+	<strong>
+		<p align="right">
+			Приложение 2 к договору № {{ clientContract }} от __________
+		</p>
+		<p align="right">
+			на предоставление услуг по аренде сервера.
+		</p>
+		<p align="left">
+			Тарифный план
+		</p>
+	</strong>
+	<p align="left">
+		Выбранный тариф - аренда виртуальных серверов VPS.
+	</p>
+	<p align="left">
+		Предоставленные ресурсы, а также их стоимость указана в таблице 1.
+	</p>
+	<p align="right">
+		Таблица 1
+	</p>
+	<table style="width: 100%; border-spacing: 1px" border="1">
+		<tr>
+			<th style="padding: 5px">Наименование</th>
+			<th>ресурс</th>
+			<th>кол-во</th>
+			<th>Цена в том числе с НДС(20%)</th>
+			<th>Цена VPS(руб./мес) в том числе с НДС(20%)</th>
+			<th>кол-во VPS шт.</th>
+			<th>сумма (руб./мес) в том числе с НДС(20%)</th>
+		</tr>
+		{% for i in length %}
+			<tr>
+				<td rowspan="3">servName[i]</td>
+				<td>Ядра шт.</td>
+				<td>{{ core[i] }}</td>
+				<td>12к</td>
+				<td>15к</td>
+				<td>16к</td>
+				<td>17к</td>
+			</tr>
+			<tr>
+				<td>озу ГБ.</td>
+				<td>{{ ram[i] }}</td>
+				<td>11к</td>
+				<td>12к</td>
+				<td>13к</td>
+				<td>14к</td>
+			</tr>
+			<tr>
+				<td>схд SAS ГБ.</td>
+				<td>{{ hdd[i] }}</td>
+				<td>11к</td>
+				<td>12к</td>
+				<td>13к</td>
+				<td>14к</td>
+			</tr>
+			<tr>
+				<td height="20px" colspan="7"></td>
+			</tr>
+		{% endfor %}
+	</table>
 </BODY>
 </HTML>
