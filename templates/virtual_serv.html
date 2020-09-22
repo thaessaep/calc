@@ -9,7 +9,7 @@
 <BODY LANG="ru-RU" LINK="#0563c1" DIR="LTR">
 <P ALIGN=CENTER STYLE="margin-bottom: 0in; line-height: 100%; widows: 0; orphans: 0">
 <FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=2>Договор
-№ {{ clientContract }}</FONT></FONT></FONT></P>
+№ {{ data['clientContract'] }}</FONT></FONT></FONT></P>
 <P ALIGN=CENTER STYLE="margin-bottom: 0in; line-height: 100%; widows: 0; orphans: 0">
 <FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=2>на
 предоставление услуг по аренде сервера</FONT></FONT></FONT></P>
@@ -981,7 +981,7 @@
 			</TD>
 		</TR>
 	</TABLE>
-
+	<br><br>
 	<strong>
 		<p align="right">
 			Приложение 2 к договору № {{ clientContract }} от __________
@@ -1012,36 +1012,69 @@
 			<th>кол-во VPS шт.</th>
 			<th>сумма (руб./мес) в том числе с НДС(20%)</th>
 		</tr>
-		{% for i in length %}
+		{% for i in range(0, data['totalLength']) %}
 			<tr>
-				<td rowspan="3">servName[i]</td>
+				<td rowspan="3">{{ data['servName'][i] }}</td>
 				<td>Ядра шт.</td>
-				<td>{{ core[i] }}</td>
-				<td>12к</td>
-				<td>15к</td>
-				<td>16к</td>
-				<td>17к</td>
+				<td align="right">{{ data['core'][i] }}</td>
+				<td align="right">{{ data['priceExcel']['corePrice'][i] / data['core'][i]}} ₽</td>
+				<td align="right">{{ data['priceExcel']['corePrice'][i] }} ₽</td>
+				<td align="center">{{ data['servNumber'][i] }}</td>
+				<td rowspan="3" align="center">
+					{{ data['resServ'][i] * data['servNumber'][i] }} ₽
+				</td>
 			</tr>
 			<tr>
 				<td>озу ГБ.</td>
-				<td>{{ ram[i] }}</td>
-				<td>11к</td>
-				<td>12к</td>
-				<td>13к</td>
-				<td>14к</td>
+				<td align="right">{{ data['ram'][i] }}</td>
+				<td align="right">{{ data['priceExcel']['ramPrice'][i] / data['ram'][i]}} ₽</td>
+				<td align="right">{{ data['priceExcel']['ramPrice'][i] }} ₽</td>
+				<td align="center">{{ data['servNumber'][i] }}</td>
 			</tr>
 			<tr>
 				<td>схд SAS ГБ.</td>
-				<td>{{ hdd[i] }}</td>
-				<td>11к</td>
-				<td>12к</td>
-				<td>13к</td>
-				<td>14к</td>
-			</tr>
+				<td align="right">{{ hdd[i] }}</td>
+				{% if (hdd[i] <= 1024) %}
+					<td align="right">{{ data['priceExcel']['sxdPrice'][i] / hdd[i] }} ₽</td>
+					<td align="right">{{ data['priceExcel']['sxdPrice'][i] }} ₽</td>
+				{% else %}
+					<td align="right">Цена договорная</td>
+					<td align="right">Цена договорная</td>
+				{% endif %}
+				<td align="center">{{ data['servNumber'][i] }}</td>
 			<tr>
 				<td height="20px" colspan="7"></td>
 			</tr>
 		{% endfor %}
+		<tr>
+			<td></td><td></td><td></td><td></td><td></td>
+			<td style="font-weight: bold">Итого:</td>
+				<td style="font-weight: bold; font-size: large" align="right">{{ data['result'] }} ₽</td>
+		</tr>
+	</table>
+	<br><br>
+	<table style="font-size: large; width: 90%">
+		<tr>
+			<th align="left">От Исполнителя:</th>
+			<th align="left">От Клиента: </th>
+		</tr>
+		<tr>
+			<td align="left">Директор</td>
+			<td align="left">Генеральный директор</td>
+		</tr>
+		<tr>
+			<td align="left">Ликаревич С.С.</td>
+			<td align="left">Информация о Клиенте</td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td align="left">Подпись:____________</td>
+			<td align="left">Подпись:____________</td>
+		</tr>
+		<tr>
+			<td align="left">(М.П.)</td>
+			<td align="left">(М.П.)</td>
+		</tr>
 	</table>
 </BODY>
 </HTML>

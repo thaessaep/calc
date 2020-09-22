@@ -1,14 +1,11 @@
 from flask import render_template, send_file
 import pdfkit
 import createRecord
-import os
 
 
 def genKP(data, clientName, clientContract):
     doc = open("templates/MainDataNetResult.html", "w", encoding="UTF-8")  # open and write new html
-    doc.write(render_template("MainDataNet.html", core=data['core'], ram=data['ram'], hdd=hddRes(data),
-                              price=data['result'], length=data['totalLength'], servNumerous=data['servNumerous'],
-                              clientName=clientName, servNumber=data['servNumber']) + "")
+    doc.write(render_template("MainDataNet.html", data=data, hdd=hddRes(data), clientName=clientName) + "")
     doc.close()
     return genPdf(clientName, "templates/MainDataNetResult.html", "pdf/"+clientName+clientContract+"KP.pdf",
                   clientName+clientContract+"KP.pdf", "KP")
@@ -16,10 +13,7 @@ def genKP(data, clientName, clientContract):
 
 def genContract(data, clientContract, clientName):
     doc = open("templates/virtual_serv_result.html", "w", encoding="UTF-8")
-    doc.write(render_template("virtual_serv.html", core=data['core'], ram=data['ram'], servNumerous=data['servNumerous']
-                              , hdd=hddRes(data), length=data['totalLength'],
-                              clientContract=clientContract, servNumber=data['servNumber'],
-                              servName=data['servName']) + "")
+    doc.write(render_template("virtual_serv.html", hdd=hddRes(data), clientContract=clientContract, data=data) + "")
     doc.close()
     return genPdf(clientName, "templates/virtual_serv_result.html", "pdf/"+clientContract+"CONT.pdf",
                   clientContract+"CONT.pdf", "CONT")

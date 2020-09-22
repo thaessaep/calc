@@ -30,13 +30,13 @@
 ответ на Ваш запрос сообщаю, что стоимость
 аренды оборудования для предоставления
 Вашей услуги на 10 объектах составит
-{{ price }} тыс. рублей в месяц.</P>
+{{ data['result'] }} рублей в месяц.</P>
 <P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in">Арендуемая
 конфигурация включает в себя следующее:</P>
-	{% for i in range(0, length) %}
-	<P>Сервер №{{ servNumerous[i] }}(Количество = {{ servNumber[i] }})</P>
-<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in">Количество ядер: {{ core[i] }} ,
-	{{ ram[i] }} ГБ ОЗУ, {{ hdd[i] }} ТБ HDD и единая
+	{% for i in range(0, data['totalLength']) %}
+	<P>Сервер №{{ data['servNumerous'][i] }}(Количество = {{ data['servNumber'][i] }})</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.49in; margin-top: 0.08in">Количество ядер: {{ data['core'][i] }} ,
+	{{ data['ram'][i] }} ГБ ОЗУ, {{ hdd[i] }} ТБ HDD и единая
 централизованная платформа для
 мониторинга и управления серверами 
 </P>

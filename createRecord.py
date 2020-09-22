@@ -19,7 +19,7 @@ DATABASE = {
     'host': 'localhost',
     'port': '5432',
     'username': 'postgres',
-    'password': 'Kjk1914',
+    'password': 'VjqGfhjkm',
     'database': 'postgres'
 }
 
@@ -27,29 +27,29 @@ DATABASE = {
 def createBase(clientName, filePath, fileType):
     engine = create_engine(URL(**DATABASE))
     DeclarativeBase.metadata.create_all(engine)
-    con = psycopg2.connect(
-        database="postgres",
-        user="postgres",
-        password="Kjk1914",
-        host="127.0.0.1",
-        port="5432",
-    )
-    cur = con.cursor()  # create cursor
+    # con = psycopg2.connect(
+    #     database="postgres",
+    #     user="postgres",
+    #     password="VJqGfhjkm",
+    #     host="127.0.0.1",
+    #     port="5432",
+    # )
+    # cur = con.cursor()  # create cursor
     # cur.execute(
     #     "DELETE FROM filepath *;"  # delete all record
     #     "ALTER SEQUENCE filepath_id_seq RESTART WITH 1"  # reboot counter id
     # )
-    cur.execute(
-        "SELECT id, client_name FROM filepath", {'clientName': clientName}
-    )
-    name = cur.fetchall()  # take id and client_name
-    check = checkTable(name, clientName)
-    if check['value'] == 1:
-        switchUpdate(cur, fileType, filePath, check)
-    else:
-        switchInsert(cur, fileType, clientName, filePath)
-    con.commit()
-    con.close()
+    # cur.execute(
+    #     "SELECT id, client_name FROM filepath", {'clientName': clientName}
+    # )
+    # name = cur.fetchall()  # take id and client_name
+    # check = checkTable(name, clientName)
+    # if check['value'] == 1:
+    #     switchUpdate(cur, fileType, filePath, check)
+    # else:
+    #     switchInsert(cur, fileType, clientName, filePath)
+    # con.commit()
+    # con.close()
 
 
 def switchUpdate(cur, fileType, filePath, check):

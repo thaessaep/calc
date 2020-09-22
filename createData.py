@@ -83,6 +83,10 @@ def pdfData(xls):  # generation value for print pdf
     servNumerous = []
     servNumberId = []
     servName = []
+    corePrice = []
+    ramPrice = []
+    sxdPrice = []
+    resServ = []
     for i in range(0, length):
         if i > 0:
             value = str(i)
@@ -101,9 +105,18 @@ def pdfData(xls):  # generation value for print pdf
             servNumberId.append(int(request.form['servNumber' + value]))
 
     for i in range(0, length):
-        res = calc_of_value.multiCore(xls, coreRes[i]) + calc_of_value.multiRAM(xls, ramRes[i]) + \
-              calc_of_value.SXD(xls, sataRes[i]) + calc_of_value.SXD(xls, sasRes[i]) + calc_of_value.SXD(xls, ssdRes[i])
-        result += total(res, servNumberId[i])
+        corePrice.append(calc_of_value.multiCore(xls, coreRes[i]))
+        ramPrice.append(calc_of_value.multiRAM(xls, ramRes[i]))
+        sxdPrice.append(calc_of_value.SXD(xls, sataRes[i]) + calc_of_value.SXD(xls, sasRes[i]) +
+                        calc_of_value.SXD(xls, ssdRes[i]))
+        resServ.append(corePrice[i] + ramPrice[i] + sxdPrice[i])
+        result += total(resServ[i], servNumberId[i])
+
+    priceExcel = {
+        'corePrice': corePrice,
+        'ramPrice': ramPrice,
+        'sxdPrice': sxdPrice
+    }
 
     data = {
         "core": coreRes,
@@ -115,7 +128,9 @@ def pdfData(xls):  # generation value for print pdf
         "servNumerous": servNumerous,
         "servNumber": servNumberId,
         'servName': servName,
-        "result": result
+        "result": result,
+        "resServ": resServ,
+        "priceExcel": priceExcel
     }
     return data
 
