@@ -21,9 +21,9 @@ def post():
         if request.form[key] == 'True':  # if was click on button
             data = createData.pdfData(xls)
             if key == 'genKP':
-                return generation.genKP(data, request.form['clientName'], request.form['clientContract'])
+                return generation.genKP(data, request.form['clientName'], request.form['requisites'])
             elif key == 'genContract':
-                return generation.genContract(data, request.form['clientContract'], request.form['clientName'])
+                return generation.genContract(data, request.form['requisites'], request.form['clientName'])
     else:  # if user write value
         data = createData.switchData(xls)
         return json.dumps(data)  # return result of values

@@ -115,7 +115,6 @@ function sendRequest(){
             'servName': servNameId,
             'totalLength': number + 1,
             'clientName': $('#clientNameId').val(),
-            'clientContract': $('#clientContractId').val(),
             'clientRequisites': $('#clientRequisitesId').val(),
         },
         success: function (res) { // принимает значение с Python и парсит его

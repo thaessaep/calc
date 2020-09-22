@@ -3,20 +3,20 @@ import pdfkit
 import createRecord
 
 
-def genKP(data, clientName, clientContract):
+def genKP(data, clientName, requisites):
     doc = open("templates/MainDataNetResult.html", "w", encoding="UTF-8")  # open and write new html
     doc.write(render_template("MainDataNet.html", data=data, hdd=hddRes(data), clientName=clientName) + "")
     doc.close()
-    return genPdf(clientName, "templates/MainDataNetResult.html", "pdf/"+clientName+clientContract+"KP.pdf",
-                  clientName+clientContract+"KP.pdf", "KP")
+    return genPdf(clientName, "templates/MainDataNetResult.html", "pdf/"+clientName+requisites+"KP.pdf",
+                  clientName+requisites+"KP.pdf", "KP")
 
 
-def genContract(data, clientContract, clientName):
+def genContract(data, requisites, clientName):
     doc = open("templates/virtual_serv_result.html", "w", encoding="UTF-8")
-    doc.write(render_template("virtual_serv.html", hdd=hddRes(data), clientContract=clientContract, data=data) + "")
+    doc.write(render_template("virtual_serv.html", hdd=hddRes(data), requisites=requisites, data=data) + "")
     doc.close()
-    return genPdf(clientName, "templates/virtual_serv_result.html", "pdf/"+clientContract+"CONT.pdf",
-                  clientContract+"CONT.pdf", "CONT")
+    return genPdf(clientName, "templates/virtual_serv_result.html", "pdf/" + requisites + "CONT.pdf",
+                  requisites + "CONT.pdf", "CONT")
 
 
 def genPdf(clientName, html, pdf, filename, fileType):  # convert html in pdf

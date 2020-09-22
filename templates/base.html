@@ -21,8 +21,6 @@
 					<div id="clientId">
 						<span>Клиент:</span>
 						<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
-						<input type="number" required min="0" name="clientContract" id="clientContractId"
-							   placeholder="№ договора">
 						<input type="number" required name="requisites" id="clientRequisitesId"
 							   placeholder="Реквизиты для договора">
 					</div>
@@ -31,7 +29,7 @@
 
 						<div id="servId">
 							<span class="server">Сервер №<output id="servNumerous">1</output>:</span>
-							<input type="number" min="1" name="servNumber" id="servNumberId" placeholder="Количество">
+							<input type="number" min="2" name="servNumber" id="servNumberId" placeholder="Количество">
 							<input type="text" required name="servName" id="servNameId" placeholder="Название">
 						</div>
 
@@ -108,6 +106,15 @@
 			</form>
 
 		</div>
+
+		<form method="post" id="List">
+			<div>
+				<select id="dropList">
+					<option>№ договора</option>
+					<option>Test</option>
+				</select>
+			</div>
+		</form>
 
 		<div class="menu">
 

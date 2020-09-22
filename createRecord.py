@@ -1,55 +1,24 @@
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.engine.url import URL
-import psycopg2
-from sqlalchemy.ext.declarative import declarative_base
-
-DeclarativeBase = declarative_base()
-
-
-class Post(DeclarativeBase):
-    __tablename__ = 'filepath'
-    id = Column(Integer, primary_key=True)
-    clientName = Column('client_name', String)
-    filePathToKP = Column('file_path_to_kp', String)
-    filePathToContract = Column('file_path_to_contract', String)
-
-
-DATABASE = {
-    'drivername': 'postgres',
-    'host': 'localhost',
-    'port': '5432',
-    'username': 'postgres',
-    'password': 'VjqGfhjkm',
-    'database': 'postgres'
-}
+import connectToBase
 
 
 def createBase(clientName, filePath, fileType):
-    engine = create_engine(URL(**DATABASE))
-    DeclarativeBase.metadata.create_all(engine)
-    # con = psycopg2.connect(
-    #     database="postgres",
-    #     user="postgres",
-    #     password="VJqGfhjkm",
-    #     host="127.0.0.1",
-    #     port="5432",
-    # )
-    # cur = con.cursor()  # create cursor
+    con = connectToBase.connect()
+    cur = con.cursor()  # create cursor
     # cur.execute(
     #     "DELETE FROM filepath *;"  # delete all record
     #     "ALTER SEQUENCE filepath_id_seq RESTART WITH 1"  # reboot counter id
     # )
-    # cur.execute(
-    #     "SELECT id, client_name FROM filepath", {'clientName': clientName}
-    # )
-    # name = cur.fetchall()  # take id and client_name
-    # check = checkTable(name, clientName)
-    # if check['value'] == 1:
-    #     switchUpdate(cur, fileType, filePath, check)
-    # else:
-    #     switchInsert(cur, fileType, clientName, filePath)
-    # con.commit()
-    # con.close()
+    cur.execute(
+        "SELECT id, client_name FROM filepath", {'clientName': clientName}
+    )
+    name = cur.fetchall()  # take id and client_name
+    check = checkTable(name, clientName)
+    if check['value'] == 1:
+        switchUpdate(cur, fileType, filePath, check)
+    else:
+        switchInsert(cur, fileType, clientName, filePath)
+    con.commit()
+    con.close()
 
 
 def switchUpdate(cur, fileType, filePath, check):
