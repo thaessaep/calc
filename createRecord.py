@@ -9,7 +9,7 @@ def createBase(clientName, filePath, fileType):
     #     "ALTER SEQUENCE filepath_id_seq RESTART WITH 1"  # reboot counter id
     # )
     cur.execute(
-        "SELECT id, client_name FROM filepath", {'clientName': clientName}
+        "SELECT client_name FROM filepath", {'clientName': clientName}
     )
     name = cur.fetchall()  # take id and client_name
     check = checkTable(name, clientName)
@@ -24,17 +24,18 @@ def createBase(clientName, filePath, fileType):
 def switchUpdate(cur, fileType, filePath, check):
     if fileType == "KP":
         cur.execute(
-            "UPDATE filepath SET file_path_to_kp=%(filePathToKP)s WHERE id=%(numerous)s",  # ID OTHER
-            {'filePathToKP': filePath, 'numerous': check['clientId']}
+            "UPDATE filepath SET file_path_to_kp=%(filePathToKP)s WHERE client_name=%(name)s",
+            {'filePathToKP': filePath, 'name': check['clientName']}
         )
     else:  # if fileType == "CONT"
         cur.execute(
-            "UPDATE filepath SET file_path_to_contract=%(file_path_to_contract)s WHERE id=%(numerous)s",  # ID OTHER
-            {'file_path_to_contract': filePath, 'numerous': check['clientId']}
+            "UPDATE filepath SET file_path_to_contract=%(file_path_to_contract)s WHERE client_name=%(name)s",
+            {'file_path_to_contract': filePath, 'name': check['clientName']}
         )
 
 
 def switchInsert(cur, fileType, clientName, filePath):
+    #print(INN)
     if fileType == "KP":
         cur.execute(
             "INSERT INTO filepath (client_name, file_path_to_kp) VALUES (%(clientName)s, %(filePathToKP)s)",
@@ -52,6 +53,6 @@ def checkTable(name, clientName):
     if len(name) == 0:
         return {'value': 0}
     for i in range(0, len(name)):
-        if name[i][1] == clientName:  # 1 = column of client_name
-            return {'value': 1, 'clientId': name[i][0]}  # second i = column of id
+        if name[i][0] == clientName:  # 1 = column of client_name
+            return {'value': 1, 'clientName': name[i][0]}  # second i = column of id
     return {'value': 0}

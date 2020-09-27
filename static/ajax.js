@@ -2,6 +2,7 @@ const xhr = new XMLHttpRequest();
 
 let number = 0
 
+
 function addServ(){
 
     number += 1;
@@ -175,7 +176,7 @@ $(document).ready(function () { // когда документ готов к р�
         $.ajax({
             url: "http://127.0.0.1:5000/",
             method: "POST",
-            success: function (){
+             success: function (){
                 let value = "";
                 for(let i = 0; i <= number; i++) {  // all results
                     if (i > 0) {

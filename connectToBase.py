@@ -20,7 +20,7 @@ DATABASE = {
     'host': 'localhost',
     'port': '5432',
     'username': 'postgres',
-    'password': 'Kjk1914',
+    'password': 'VjqGfhjkm',
     'database': 'postgres'
 }
 
@@ -31,7 +31,7 @@ def connect():
     con = psycopg2.connect(
         database="postgres",
         user="postgres",
-        password="Kjk1914",
+        password="VjqGfhjkm",
         host="127.0.0.1",
         port="5432",
     )

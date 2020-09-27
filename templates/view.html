@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<link rel="icon" type="image/png" href="static/images/icons/favicon.ico">
+</head>
+<body>
+<style>
+    body {
+        background: linear-gradient(90deg, #000, #fff);
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+				integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+				crossorigin="anonymous"></script>
+<script src="static/dropList.js"></script>
+
+    <span ><h2 align="center" style="margin-bottom: -20px; margin-top: 300px">Запрос файлов</h2></span>
+    <form method="post" style="text-align: center">
+            <input list="dropZip" name="Zip" type="text" placeholder="Выберите человека" autofocus autocomplete="off"/>
+        <div>
+            <datalist id="dropZip" style="width: 200px; height: 25px"></datalist>
+        </div>
+        <button type="submit">
+            Скачать файлы
+        </button>
+    </form>
+</body>
+</html>

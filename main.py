@@ -3,9 +3,23 @@ import json
 import generation
 import xlrd
 import createData
+import dropList
+import dropFile
 
 
 app = Flask(__name__)
+
+
+@app.route("/view", methods=["POST", "GET"])
+def view():
+    for i in request.form.keys():
+        if request.method == "POST":
+            if i == 'Zip':
+                return dropFile.dropFile(request.form['Zip'])  # return zip
+            if request.form[i] == 'dropList':
+                return json.dumps(dropList.dropList())  # return info about list of client
+    else:
+        return render_template("view.html")
 
 
 @app.route("/", methods=["POST", "GET"])
@@ -21,9 +35,9 @@ def post():
         if request.form[key] == 'True':  # if was click on button
             data = createData.pdfData(xls)
             if key == 'genKP':
-                return generation.genKP(data, request.form['clientName'], request.form['requisites'])
+                return generation.genKP(data, request.form['clientName'] + request.form['INN'])
             elif key == 'genContract':
-                return generation.genContract(data, request.form['requisites'], request.form['clientName'])
+                return generation.genContract(data, request.form['clientName']+request.form['INN'], request.form['INN'])
     else:  # if user write value
         data = createData.switchData(xls)
         return json.dumps(data)  # return result of values

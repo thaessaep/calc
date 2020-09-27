@@ -21,8 +21,15 @@
 					<div id="clientId">
 						<span>Клиент:</span>
 						<input type="text" required name="clientName" id="clientNameId" placeholder="Название">
-						<input type="number" required name="requisites" id="clientRequisitesId"
-							   placeholder="Реквизиты для договора">
+						<input type="text" required name="address" placeholder="Адрес места нахождения">
+						<input type="text" required name="addressFact" placeholder="Адрес фактический">
+						<input type="text" required name="numberPhone" placeholder="Телефон/Факс">
+						<input type="text" required name="Mail" placeholder="Электронный адрес">
+						<input type="text" required name="r/sch" placeholder="р/сч"><p></p>
+						<input type="text" required name="k/s" placeholder="к/с">
+						<input type="text" required name="BIC" placeholder="БИК">
+						<input type="text" required name="INN" placeholder="ИНН">
+						<input type="text" required name="OGRN" placeholder="ОГРН">
 					</div>
 
 					<div id="duplicate">
@@ -78,6 +85,7 @@
 								<span>Цена по прайсу: <output id="ssdRes">0</output>₽</span>
 						</div>
 
+
 						<div id="resId">
 							<span>Цена в месяц: <output id="result">0</output>₽</span>
 						</div>
@@ -106,15 +114,6 @@
 			</form>
 
 		</div>
-
-		<form method="post" id="List">
-			<div>
-				<select id="dropList">
-					<option>№ договора</option>
-					<option>Test</option>
-				</select>
-			</div>
-		</form>
 
 		<div class="menu">
 
