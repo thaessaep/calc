@@ -37,7 +37,8 @@ def post():
             if key == 'genKP':
                 return generation.genKP(data, request.form['clientName'] + request.form['INN'])
             elif key == 'genContract':
-                return generation.genContract(data, request.form['clientName']+request.form['INN'], request.form['INN'])
+                return generation.genContract(data, request.form,
+                                              request.form['clientName']+request.form['INN'], request.form['INN'])
     else:  # if user write value
         data = createData.switchData(xls)
         return json.dumps(data)  # return result of values

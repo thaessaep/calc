@@ -910,30 +910,25 @@
 <P STYLE="margin-bottom: 0in; line-height: 0.17in">БИК 040407777</P>
 <P STYLE="margin-bottom: 0.11in"><BR><BR>
 </P>
-<P STYLE="margin-bottom: 0.11in">Клиент</P>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif"><B>data['clientName']</B></FONT></P>
+<P STYLE="margin-bottom: 0.11in">Клиент: {{ form['clientName'] }}</P>
 <P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">Адрес
-места нахождения: data['address'], </FONT>
+места нахождения: {{ form['address'] }}, </FONT>
 </P>
 <P STYLE="margin-bottom: 0in; line-height: 100%">Адрес
-фактический: data['addressFact']</P>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">Телефон/Факс: data['numberPhone']</FONT></P>
+фактический: {{ form['addressFact'] }}</P>
+<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">Телефон/Факс: {{ form['numberPhone'] }}</FONT></P>
 <P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">Электронный
-адрес: data['mail']</FONT>
+адрес: {{ form['Mail'] }}</FONT>
 </P>
 <P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">р/
-сч     data['r/sch']</FONT></P>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">к/с
-   data['k/s']</FONT></P>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">БИК
-      data['BIC']</FONT>
+сч:     {{ form['r/sch'] }}</FONT></P>
+<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">к/с:
+   {{ form['k/s'] }}</FONT></P>
+<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">БИК:
+      {{ form['BIC'] }}</FONT>
 </P>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">ДО
-«Коломяжский» в г. Санкт-Петербург
-Филиала «Санкт-Петербургский» ПАО
-«АЛЬФА-БАНК»</FONT></P>
-<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">ИНН data['INN']</FONT></P>
-<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">ОГРН: data['OGRN']</FONT></P>
+<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">ИНН: {{ form['INN'] }}</FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Calibri, serif">ОГРН: {{ form['OGRN'] }}</FONT></P>
 <P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
 </P>
 <P STYLE="margin-bottom: 0.11in"><CENTER>
@@ -971,7 +966,7 @@
 			</TD>
 		</TR>
 	</TABLE>
-	<br><br>
+	<br><br><br><br><br><br><br><br><br><br>
 	<strong>
 		<p align="right">
 			Приложение 2 к договору № {{ requisites }} от __________

@@ -13,9 +13,6 @@ function dropList(){
                     let option = document.createElement('option');
                     option.value = result[i];
                     objSel.append(option);
-                    // objSel.options[i] = new Option(result[i]);
-                    // objSel.options[i].setAttribute('name', result[i]);
-                    // console.log(objSel.options[i])
                 }
                 console.log(objSel)
             },

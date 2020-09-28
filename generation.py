@@ -11,9 +11,10 @@ def genKP(data, clientName):
                   clientName + "KP.pdf", "KP")
 
 
-def genContract(data, clientName, INN):
+def genContract(data, request, clientName, INN):
     doc = open("templates/virtual_serv_result.html", "w", encoding="UTF-8")
-    doc.write(render_template("virtual_serv.html", hdd=hddRes(data), requisites=INN, data=data) + "")
+    doc.write(render_template("virtual_serv.html", hdd=hddRes(data), form=request,
+                              requisites=INN, data=data) + "")
     doc.close()
     return genPdf(clientName, "templates/virtual_serv_result.html", "pdf/" + clientName + "CONT.pdf",
                   clientName + "CONT.pdf", "CONT")
